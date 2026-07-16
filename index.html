@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RGAE - Consultor de Proveedores</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+  <style>
+    :root {
+      --primary: #1a365d;
+      --secondary: #2c5282;
+      --accent: #38a169;
+    }
+
+    body {
+      background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+      min-height: 100vh;
+    }
+
+    .navbar {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .card {
+      border: none;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+      border: none;
+      padding: 12px 30px;
+      font-weight: 600;
+    }
+
+    .table thead {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+      color: white;
+    }
+
+    .status-badge {
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+
+    .status-inscrito {
+      background: #c6f6d5;
+      color: #22543d;
+    }
+
+    .status-precalificado {
+      background: #bee3f8;
+      color: #2a4365;
+    }
+
+    .status-no-actualizado {
+      background: #feebc8;
+      color: #744210;
+    }
+
+    .status-error {
+      background: #fed7d7;
+      color: #742a2a;
+    }
+
+    .hero-section {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+      color: white;
+      padding: 40px 0;
+      margin-bottom: 30px;
+      border-radius: 0 0 30px 30px;
+    }
+
+    .stats-card {
+      background: white;
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    }
+
+    .stats-number {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .footer {
+      background: var(--primary);
+      color: white;
+      padding: 20px 0;
+      margin-top: 50px;
+    }
+
+    #consoleOutput {
+      line-height: 1.4;
+    }
+
+    /* Timeout settings panel */
+    .timeout-settings {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      margin-top: 16px;
+      padding: 12px 18px;
+      background: rgba(26, 54, 93, 0.04);
+      border: 1px solid rgba(26, 54, 93, 0.1);
+      border-radius: 10px;
+    }
+
+    .timeout-label {
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #718096;
+      white-space: nowrap;
+    }
+
+    .timeout-group {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 4px;
+    }
+
+    .timeout-spinner-wrap {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      border: 1px solid #cbd5e0;
+      border-radius: 8px;
+      overflow: hidden;
+      background: #fff;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .timeout-spinner-wrap:focus-within {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(26, 54, 93, 0.1);
+    }
+
+    .timeout-spinner-wrap input[type=number] {
+      width: 58px;
+      border: none;
+      outline: none;
+      text-align: center;
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: var(--primary);
+      padding: 5px 4px;
+      -moz-appearance: textfield;
+      background: transparent;
+    }
+
+    .timeout-spinner-wrap input[type=number]::-webkit-inner-spin-button,
+    .timeout-spinner-wrap input[type=number]::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+    }
+
+    .spin-btn {
+      background: none;
+      border: none;
+      border-left: 1px solid #e2e8f0;
+      padding: 0 7px;
+      cursor: pointer;
+      color: #718096;
+      font-size: 0.8rem;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      justify-content: center;
+      gap: 1px;
+    }
+
+    .spin-btn:hover {
+      background: #edf2f7;
+      color: var(--primary);
+    }
+
+    .spin-btn span {
+      display: block;
+      line-height: 1;
+      font-size: 0.6rem;
+      color: #a0aec0;
+    }
+
+    .timeout-unit {
+      font-size: 0.68rem;
+      color: #a0aec0;
+      font-weight: 500;
+    }
+
+    @media (max-width: 576px) {
+      .timeout-settings { flex-wrap: wrap; }
+    }
+
+    /* Professional NITs Panel (Floating glassmorphism) */
+    .nits-panel {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      width: 320px;
+      z-index: 1000;
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 16px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      border-top: 4px solid var(--primary);
+      overflow: hidden;
+    }
+
+    .nits-panel.minimized {
+      width: 54px;
+      height: 54px;
+      border-radius: 27px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+    }
+
+    .nits-panel.minimized .card-header {
+      padding: 0 !important;
+      width: 100%;
+      height: 100%;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      border-bottom: none;
+    }
+
+    .nits-panel.minimized .card-header i.bi-stack {
+      margin: 0 !important;
+      font-size: 1.5rem;
+    }
+
+    .nits-panel.minimized .card-body,
+    .nits-panel.minimized .fw-bold span {
+      display: none;
+    }
+
+    .nits-panel.minimized .bi-chevron-down {
+      display: none;
+    }
+
+    .nits-panel .card-header {
+      background: transparent !important;
+      color: var(--primary) !important;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+      padding: 12px 18px;
+      cursor: pointer;
+    }
+
+    #nitsEditor {
+      font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+      font-size: 0.85rem;
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      background-color: #f8fafc;
+      padding: 12px;
+      margin-bottom: 15px;
+      transition: border-color 0.2s;
+      height: 400px;
+      /* Mas alto como pidió */
+      min-height: 200px;
+      resize: vertical;
+    }
+
+    #nitsEditor:focus {
+      border-color: var(--primary);
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(26, 54, 93, 0.1);
+    }
+
+    .panel-controls {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .nits-badge {
+      font-size: 0.75rem;
+      padding: 4px 10px;
+      border-radius: 6px;
+      background: #edf2f7;
+      color: #4a5568;
+      font-weight: 600;
+    }
+
+    #saveStatus {
+      font-size: 0.7rem;
+      height: 14px;
+      margin-top: 6px;
+      display: block;
+    }
+
+    .btn-upload-compact {
+      padding: 4px 12px;
+      font-size: 0.8rem;
+      border-radius: 6px;
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="#">
+        <i class="bi bi-building"></i> RGAE Guatemala
+      </a>
+    </div>
+  </nav>
+
+  <div class="hero-section">
+    <div class="container text-center">
+      <h1 class="display-5 fw-bold mb-2">Consulta de Proveedores RGAE</h1>
+      <p class="lead mb-0">Consulta Registro General de Adquisiciones del Estado</p>
+    </div>
+  </div>
+
+  <div class="container pb-5">
+    <div class="card mb-4">
+      <div class="card-body">
+        <h5 class="card-title mb-3">
+          <i class="bi bi-play-circle"></i> Ejecutar Scraper
+        </h5>
+        <p class="text-muted">Haga clic en el botón para ejecutar el scraper. Se abrirá Chrome para resolver el captcha.
+        </p>
+        <button class="btn btn-primary btn-lg me-2" onclick="ejecutarScraper()">
+          <i class="bi bi-play-fill"></i> Ejecutar Consulta
+        </button>
+        <button class="btn btn-outline-secondary btn-lg" onclick="toggleConsole()">
+          <i class="bi bi-terminal"></i> Ver Consola
+        </button>
+
+        <!-- Timeout Settings -->
+        <div class="timeout-settings">
+          <span class="timeout-label"><i class="bi bi-sliders me-1"></i> Tiempos</span>
+
+          <div class="timeout-group">
+            <span class="timeout-label">General Entre Nits</span>
+            <div class="timeout-spinner-wrap">
+              <input type="number" id="inputTimeoutGeneral" value="4" min="1" max="120">
+              <div class="spin-btn" onclick="spinChange('inputTimeoutGeneral', 1)" title="Subir">
+                <span>&#9650;</span>
+              </div>
+              <div class="spin-btn" onclick="spinChange('inputTimeoutGeneral', -1)" title="Bajar">
+                <span>&#9660;</span>
+              </div>
+            </div>
+            <span class="timeout-unit">segundos</span>
+          </div>
+
+          <div class="timeout-group">
+            <span class="timeout-label">Cloudflare</span>
+            <div class="timeout-spinner-wrap">
+              <input type="number" id="inputTimeoutCloudflare" value="20" min="1" max="300">
+              <div class="spin-btn" onclick="spinChange('inputTimeoutCloudflare', 1)" title="Subir">
+                <span>&#9650;</span>
+              </div>
+              <div class="spin-btn" onclick="spinChange('inputTimeoutCloudflare', -1)" title="Bajar">
+                <span>&#9660;</span>
+              </div>
+            </div>
+            <span class="timeout-unit">segundos</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card nits-panel minimized" id="nitsPanel">
+      <div class="card-header d-flex justify-content-between align-items-center" onclick="toggleNitsPanel()"
+        role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' ')toggleNitsPanel()">
+        <span class="fw-bold"><i class="bi bi-stack me-2"></i> <span class="panel-title-text">Gestión de
+            NITs</span></span>
+        <i class="bi bi-chevron-down ms-2" id="panelChevron"></i>
+      </div>
+      <div class="card-body p-3">
+        <label for="nitsEditor" class="form-label small text-muted text-uppercase fw-bold mb-2"
+          style="font-size: 0.65rem; letter-spacing: 0.05em;">Listado de NITs (una por línea)</label>
+        <textarea id="nitsEditor" class="form-control" spellcheck="false" oninput="debounceSaveNits()"></textarea>
+
+        <div class="panel-controls">
+          <span class="nits-badge" id="nitsCountBadge">Registros: -</span>
+          <input type="file" id="nitsUpload" class="d-none" accept=".csv,.xlsx,.xls">
+          <button class="btn btn-primary btn-upload-compact" onclick="document.getElementById('nitsUpload').click()">
+            <i class="bi bi-cloud-arrow-up me-1"></i> Importar
+          </button>
+        </div>
+        <div id="saveStatus" class="text-muted text-end"></div>
+      </div>
+    </div>
+
+    <div id="loadingSection" class="text-center py-5" style="display: none;">
+      <output class="spinner-border text-primary mb-4"></output>
+      <h5>Ejecutando Scraper...</h5>
+      <p class="text-muted">Se abrirá Chrome. Resuelva el captcha y cierre el navegador cuando aparezcan los datos.</p>
+    </div>
+
+    <div id="consoleSection" class="card mb-4" style="display: none;">
+      <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center">
+        <h6 class="mb-0"><i class="bi bi-terminal"></i> Consola del Scraper</h6>
+        <div>
+          <output class="badge bg-success me-2" id="consoleStatus">Ejecutando...</output>
+          <button class="btn btn-sm btn-outline-light border-0" onclick="toggleConsole()"><i
+              class="bi bi-x-lg"></i></button>
+        </div>
+      </div>
+      <div class="card-body bg-dark" style="max-height: 300px; overflow-y: auto;">
+        <pre class="text-success mb-0" id="consoleOutput"
+          style="font-family: 'Consolas', monospace; font-size: 0.85rem; white-space: pre-wrap;"></pre>
+      </div>
+    </div>
+
+    <div id="statsSection" class="row mb-4" style="display: none;">
+      <div class="col-md-4">
+        <div class="stats-card">
+          <div class="stats-number" id="totalStats">0</div>
+          <div class="stats-label">Total</div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="stats-card">
+          <div class="stats-number text-success" id="encontradosStats">0</div>
+          <div class="stats-label">Encontrados</div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="stats-card">
+          <div class="stats-number text-danger" id="errorStats">0</div>
+          <div class="stats-label">Errores</div>
+        </div>
+      </div>
+    </div>
+
+    <div id="resultsSection" class="card" style="display: none;">
+      <div class="card-header bg-white d-flex justify-content-between align-items-center">
+        <h5 class="mb-0"><i class="bi bi-table"></i> Resultados</h5>
+        <div>
+          <button class="btn btn-sm btn-outline-success me-2" onclick="descargarExcel()">
+            <i class="bi bi-file-earmark-excel"></i> Excel
+          </button>
+          <button class="btn btn-sm btn-outline-warning me-2" onclick="descargarJson()">
+            <i class="bi bi-filetype-json"></i> JSON
+          </button>
+          <button class="btn btn-sm btn-outline-primary" onclick="recargarDatos()">
+            <i class="bi bi-arrow-clockwise"></i> Actualizar
+          </button>
+        </div>
+      </div>
+      <div class="card-body p-0">
+        <div class="table-responsive">
+          <table class="table table-hover mb-0" id="resultsTable">
+            <thead>
+              <tr>
+                <th>NIT</th>
+                <th>Nombre / Razón Social</th>
+                <th>Estado</th>
+                <th>Fecha Inscripción</th>
+                <th>Fecha Precalificación</th>
+                <th>Tipo Precalificación</th>
+                <th>Vigencia</th>
+              </tr>
+            </thead>
+            <tbody id="resultsBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div id="noDataSection" class="card text-center py-5">
+      <div class="card-body">
+        <i class="bi bi-inbox text-muted" style="font-size: 4rem;"></i>
+        <h5 class="mt-3">Sin datos</h5>
+        <p class="text-muted">Ejecute el scraper para consultar los proveedores.</p>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer text-center">
+    <div class="container">
+      <p class="mb-0"></p>
+      <small>Scrapper 2026</small>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    let resultados = [];
+    let pollInterval = null;
+    let knownRunId = null;  // Detecta cuándo hay una nueva ejecución
+    const POLL_INTERVAL_SEC = 2;
+
+    function spinChange(id, delta) {
+      const input = document.getElementById(id);
+      const val = parseInt(input.value, 10) || 0;
+      const min = parseInt(input.min, 10);
+      const max = parseInt(input.max, 10);
+      input.value = Math.min(max, Math.max(min, val + delta));
+    }
+
+    async function ejecutarScraper() {
+      document.getElementById('loadingSection').style.display = 'none';
+      document.getElementById('resultsSection').style.display = 'none';
+      document.getElementById('statsSection').style.display = 'none';
+      document.getElementById('noDataSection').style.display = 'none';
+      document.getElementById('consoleSection').style.display = 'block';
+      document.getElementById('consoleOutput').textContent = 'Iniciando scraper...\n';
+      document.getElementById('consoleStatus').textContent = 'Ejecutando...';
+      document.getElementById('consoleStatus').className = 'badge bg-success';
+
+      // Leer valores de los spinners
+      const timeoutGeneral = parseInt(document.getElementById('inputTimeoutGeneral').value, 10) || 4;
+      const timeoutCloudflare = parseInt(document.getElementById('inputTimeoutCloudflare').value, 10) || 20;
+
+      // Limpiar el runId conocido para que el primer poll detecte el nuevo run
+      knownRunId = null;
+
+      try {
+        const response = await fetch('/api/run-scraper', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ timeoutGeneral, timeoutCloudflare })
+        });
+        const data = await response.json();
+
+        if (data.status === 'started') {
+          // Registrar inmediatamente el runId del nuevo proceso
+          knownRunId = data.runId;
+
+          pollInterval = setInterval(async () => {
+            try {
+              const res = await fetch('/api/running');
+              const data = await res.json();
+
+              // Si el servidor reporta un runId diferente al que conocemos,
+              // significa que una nueva ejecución comenzó (ej: doble clic).
+              // Limpiamos la pantalla para no mostrar contenido de la ejecución anterior.
+              if (data.runId && data.runId !== knownRunId) {
+                knownRunId = data.runId;
+                document.getElementById('consoleOutput').textContent = '';
+              }
+
+              if (data.log) {
+                const consoleDiv = document.getElementById('consoleSection').querySelector('.card-body');
+                // Solo hacer auto-scroll si el usuario ya está cerca del fondo (±50px)
+                const estaAlFondo = consoleDiv.scrollHeight - consoleDiv.scrollTop - consoleDiv.clientHeight < 50;
+                document.getElementById('consoleOutput').textContent = data.log;
+                if (estaAlFondo) {
+                  consoleDiv.scrollTop = consoleDiv.scrollHeight;
+                }
+              }
+
+              if (data.completed) {
+                clearInterval(pollInterval);
+                pollInterval = null;
+                document.getElementById('consoleStatus').textContent = 'Completado';
+                document.getElementById('consoleStatus').className = 'badge bg-info';
+                cargarDatos();
+              }
+            } catch (e) {
+              console.error('Error polling scraper status:', e);
+            }
+          }, POLL_INTERVAL_SEC * 1000);
+        } else {
+          alert('Error al iniciar scraper');
+        }
+      } catch (e) {
+        alert('Error al iniciar scraper: ' + e.message);
+      }
+    }
+
+    function recargarDatos() {
+      if (pollInterval) {
+        clearInterval(pollInterval);
+        pollInterval = null;
+        document.getElementById('consoleSection').style.display = 'none';
+        document.getElementById('consoleStatus').textContent = 'Ejecutando...';
+        document.getElementById('consoleStatus').className = 'badge bg-success';
+      }
+      cargarDatos();
+    }
+
+    async function cargarDatos() {
+      try {
+        const response = await fetch('proveedores_rgae.json');
+        if (!response.ok) throw new Error('No se pudo cargar');
+
+        resultados = await response.json();
+        mostrarResultados();
+      } catch (e) {
+        console.error('Error cargando datos:', e);
+        document.getElementById('noDataSection').style.display = 'block';
+        document.getElementById('resultsSection').style.display = 'none';
+        document.getElementById('statsSection').style.display = 'none';
+      }
+    }
+
+    function mostrarResultados() {
+      if (!resultados || resultados.length === 0) {
+        document.getElementById('noDataSection').style.display = 'block';
+        return;
+      }
+
+      const tbody = document.getElementById('resultsBody');
+      tbody.innerHTML = '';
+
+      let encontrados = 0;
+      let errores = 0;
+
+      resultados.forEach(r => {
+        if (r.status === 'ENCONTRADO') {
+          encontrados++;
+        } else {
+          errores++;
+        }
+
+        const d = r.data || {};
+        const estado = d['Estado Actual'] || d['Estado de Proveedor en RGAE'] || 'No Inscrito';
+        let estadoClass = 'status-error';
+        if (estado.includes('Inscrito')) estadoClass = 'status-inscrito';
+        else if (estado.includes('Precalificado')) estadoClass = 'status-precalificado';
+        else if (estado.includes('No Actualizado')) estadoClass = 'status-no-actualizado';
+
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td><strong>${r.nit}</strong></td>
+          <td>${d['Nombre o razón social'] || '-'}</td>
+          <td><span class="status-badge ${estadoClass}">${estado}</span></td>
+          <td>${d['Fecha de Inscripción'] || '-'}</td>
+          <td>${d['Fecha Última Precalificación'] || '-'}</td>
+          <td>${d['Tipo de Precalificación'] || '-'}</td>
+          <td>${d['Vigencia de Última Precalificación'] || '-'}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+
+      document.getElementById('totalStats').textContent = resultados.length;
+      document.getElementById('encontradosStats').textContent = encontrados;
+      document.getElementById('errorStats').textContent = errores;
+
+      document.getElementById('noDataSection').style.display = 'none';
+      document.getElementById('statsSection').style.display = 'flex';
+      document.getElementById('resultsSection').style.display = 'block';
+      document.getElementById('loadingSection').style.display = 'none';
+      // La consola NO se oculta aquí para que el usuario pueda seguir viéndola
+    }
+
+    function descargarExcel() {
+      window.open('proveedores_rgae.xlsx', '_blank');
+    }
+
+    function descargarJson() {
+      window.open('proveedores_rgae.json', '_blank');
+    }
+
+    function toggleConsole() {
+      const consoleSection = document.getElementById('consoleSection');
+      if (consoleSection.style.display === 'none') {
+        consoleSection.style.display = 'block';
+        consoleSection.scrollIntoView({ behavior: 'smooth' });
+      } else {
+        consoleSection.style.display = 'none';
+      }
+    }
+
+    // --- Nueva lógica para gestión de NITs ---
+    let saveTimeout = null;
+
+    function toggleNitsPanel() {
+      const panel = document.getElementById('nitsPanel');
+      const chevron = document.getElementById('panelChevron');
+      const titleText = panel.querySelector('.panel-title-text');
+
+      panel.classList.toggle('minimized');
+
+      if (panel.classList.contains('minimized')) {
+        chevron.style.display = 'none';
+        titleText.style.display = 'none';
+      } else {
+        chevron.style.display = 'inline-block';
+        titleText.style.display = 'inline';
+        chevron.classList.toggle('bi-chevron-up', false);
+        chevron.classList.toggle('bi-chevron-down', true);
+      }
+    }
+
+    async function actualizarNitsUI() {
+      try {
+        const res = await fetch('/api/get-nits');
+        const data = await res.json();
+        const nits = data.nits || [];
+
+        document.getElementById('nitsEditor').value = nits.join('\n');
+        document.getElementById('nitsCountBadge').textContent = `NITs: ${nits.length}`;
+      } catch (e) {
+        console.error('Error al obtener NITs:', e);
+      }
+    }
+
+    function debounceSaveNits() {
+      const status = document.getElementById('saveStatus');
+      status.textContent = 'Escribiendo...';
+
+      clearTimeout(saveTimeout);
+      saveTimeout = setTimeout(guardarNitsActuales, 1000);
+    }
+
+    async function guardarNitsActuales() {
+      const text = document.getElementById('nitsEditor').value;
+      const nits = text.split('\n')
+        .map(n => n.trim())
+        .filter(n => n.length > 0);
+
+      const status = document.getElementById('saveStatus');
+
+      try {
+        const response = await fetch('/api/upload-nits', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ nits })
+        });
+
+        const result = await response.json();
+        if (result.status === 'success') {
+          status.innerHTML = '<span class="text-success"><i class="bi bi-check-all"></i> Guardado</span>';
+          document.getElementById('nitsCountBadge').textContent = `NITs: ${result.count}`;
+          setTimeout(() => { if (status.textContent.includes('Guardado')) status.textContent = ''; }, 3000);
+        } else {
+          status.innerHTML = '<span class="text-danger">Error</span>';
+        }
+      } catch (err) {
+        console.error('Error al guardar NITs:', err);
+        status.innerHTML = '<span class="text-danger">Error de red</span>';
+      }
+    }
+
+    document.getElementById('nitsUpload').addEventListener('change', async (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = async (evt) => {
+        try {
+          const data = evt.target.result;
+          const workbook = XLSX.read(data, { type: 'binary' });
+          const sheet = workbook.Sheets[workbook.SheetNames[0]];
+          const json = XLSX.utils.sheet_to_json(sheet);
+
+          const nits = json.map(row => {
+            const nitValue = row.NIT || row.nit || row.Nit || Object.values(row)[0];
+            return String(nitValue).trim();
+          }).filter(n => n && n !== 'undefined' && n !== 'null');
+
+          if (nits.length === 0) {
+            alert('No se encontraron NITs válidos.');
+            return;
+          }
+
+          document.getElementById('nitsEditor').value = nits.join('\n');
+          guardarNitsActuales();
+        } catch (err) {
+          alert('Error: ' + err.message);
+        }
+        e.target.value = ''; // Limpiar input
+      };
+      reader.readAsBinaryString(file);
+    });
+
+    window.onload = () => {
+      cargarDatos();
+      actualizarNitsUI();
+    };
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,1725 @@
+[
+  {
+    "nit": "14946203",
+    "url": "https://sistema.rgae.gob.gt/consulta-proveedores/proveedor/14946203?source=guatecompras",
+    "status": "ENCONTRADO",
+    "data": {
+      "NIT": "14946203",
+      "Nombre o razón social": "DISTRIBUIDORA DE ELECTRICIDAD DE ORIENTE SOCIEDAD ANONIMA",
+      "Estado Actual": "Inscrito",
+      "Fecha de Inscripción": "28/06/2019",
+      "Representantes": [
+        {
+          "nit": "94138559",
+          "pais": "Guatemala",
+          "pasaporte": "",
+          "nombre": "PAULO CESAR PARRA BENAVIDES"
+        },
+        {
+          "nit": "89558138",
+          "pais": "Guatemala",
+          "pasaporte": "",
+          "nombre": "NERY ARIEL CORDON CARRERA"
+        }
+      ],
+      "Comercios": [
+        {
+          "nombre": "DEORSA",
+          "direccion": "DIAGONAL 6 10-50 ZONA 10 EDIFICIO INTERAMERICAS WORLD CENTER TORRE SUR NIVEL 14 GUATEMALA,GUATEMALA"
+        }
+      ],
+      "Especialidades": [],
+      "Solicitudes": [
+        {
+          "numero": "ACSO202669091",
+          "tipo": "Actualización de inscripción de sociedad",
+          "estado": "Finalizada",
+          "fechaAprobacion": "16/02/2026",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "APTR2025130431",
+          "tipo": "Ampliación de Proveedores Transparentes",
+          "estado": "Finalizada",
+          "fechaAprobacion": "31/07/2025",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "ACSO202556843",
+          "tipo": "Actualización de inscripción de sociedad",
+          "estado": "Finalizada",
+          "fechaAprobacion": "16/02/2025",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "ACSO202465209",
+          "tipo": "Actualización de inscripción de sociedad",
+          "estado": "Finalizada",
+          "fechaAprobacion": "15/02/2024",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "ACSO202347533",
+          "tipo": "Actualización de inscripción de sociedad",
+          "estado": "Finalizada",
+          "fechaAprobacion": "15/02/2023",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "ACSO202254352",
+          "tipo": "Actualización de inscripción de sociedad",
+          "estado": "Finalizada",
+          "fechaAprobacion": "12/02/2022",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "ACSO202161494",
+          "tipo": "Actualización de inscripción de sociedad",
+          "estado": "Finalizada",
+          "fechaAprobacion": "20/09/2021",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "ACSO202058190",
+          "tipo": "Actualización de inscripción de sociedad",
+          "estado": "Finalizada",
+          "fechaAprobacion": "04/03/2020",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "INSS201951995",
+          "tipo": "Inscripción de Sociedad",
+          "estado": "Finalizada",
+          "fechaAprobacion": "28/06/2019",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "CTP201831082",
+          "tipo": "Inscripcion y precalificacion transitoria Bienes y Servicios",
+          "estado": "Finalizada",
+          "fechaAprobacion": "19/12/2018",
+          "constancia": "",
+          "resolucion": ""
+        }
+      ]
+    }
+  },
+  {
+    "nit": "14946211",
+    "url": "https://sistema.rgae.gob.gt/consulta-proveedores/proveedor/14946211?source=guatecompras",
+    "status": "ENCONTRADO",
+    "data": {
+      "NIT": "14946211",
+      "Nombre o razón social": "DISTRIBUIDORA DE ELECTRICIDAD DE OCCIDENTE SOCIEDAD ANONIMA",
+      "Estado Actual": "Inscrito",
+      "Fecha de Inscripción": "28/06/2019",
+      "Representantes": [
+        {
+          "nit": "94138559",
+          "pais": "Guatemala",
+          "pasaporte": "",
+          "nombre": "PAULO CESAR PARRA BENAVIDES"
+        },
+        {
+          "nit": "89558138",
+          "pais": "Guatemala",
+          "pasaporte": "",
+          "nombre": "NERY ARIEL CORDON CARRERA"
+        }
+      ],
+      "Comercios": [
+        {
+          "nombre": "DEOCSA",
+          "direccion": "DIAGONAL 6 10-50 ZONA 10 EDIFICIO INTERAMERICAS WORLD CENTER TORRE SUR NIVEL 14 GUATEMALA,GUATEMALA"
+        }
+      ],
+      "Especialidades": [],
+      "Solicitudes": [
+        {
+          "numero": "ACSO202669012",
+          "tipo": "Actualización de inscripción de sociedad",
+          "estado": "Finalizada",
+          "fechaAprobacion": "16/02/2026",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "APTR2025131822",
+          "tipo": "Ampliación de Proveedores Transparentes",
+          "estado": "Finalizada",
+          "fechaAprobacion": "31/07/2025",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "ACSO202556007",
+          "tipo": "Actualización de inscripción de sociedad",
+          "estado": "Finalizada",
+          "fechaAprobacion": "12/02/2025",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "ACSO202449219",
+          "tipo": "Actualización de inscripción de sociedad",
+          "estado": "Finalizada",
+          "fechaAprobacion": "21/02/2024",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "ACSO202347038",
+          "tipo": "Actualización de inscripción de sociedad",
+          "estado": "Finalizada",
+          "fechaAprobacion": "15/02/2023",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "ACSO202254292",
+          "tipo": "Actualización de inscripción de sociedad",
+          "estado": "Finalizada",
+          "fechaAprobacion": "14/02/2022",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "ACSO202161415",
+          "tipo": "Actualización de inscripción de sociedad",
+          "estado": "Finalizada",
+          "fechaAprobacion": "20/09/2021",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "ACSO202058195",
+          "tipo": "Actualización de inscripción de sociedad",
+          "estado": "Finalizada",
+          "fechaAprobacion": "04/03/2020",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "INSS201950854",
+          "tipo": "Inscripción de Sociedad",
+          "estado": "Finalizada",
+          "fechaAprobacion": "28/06/2019",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "CTP201831867",
+          "tipo": "Inscripcion y precalificacion transitoria Bienes y Servicios",
+          "estado": "Finalizada",
+          "fechaAprobacion": "19/12/2018",
+          "constancia": "",
+          "resolucion": ""
+        }
+      ]
+    }
+  },
+  {
+    "nit": "9929290",
+    "url": "https://sistema.rgae.gob.gt/consulta-proveedores/proveedor/9929290?source=guatecompras",
+    "status": "ENCONTRADO",
+    "data": {
+      "NIT": "9929290",
+      "Nombre o razón social": "TELECOMUNICACIONES DE GUATEMALA, SOCIEDAD ANONIMA",
+      "Estado Actual": "Precalificado",
+      "Fecha de Inscripción": "22/07/2019",
+      "Fecha Última Precalificación": "29/09/2025",
+      "Tipo de Precalificación": "Precalificacion de Bienes, Servicios y Suministros",
+      "Vigencia de Última Precalificación": "29/09/2027",
+      "Representantes": [
+        {
+          "nit": "83597840",
+          "pais": "Guatemala",
+          "pasaporte": "",
+          "nombre": "JOSE ALEJANDRO QUIÑONEZ PIRA"
+        },
+        {
+          "nit": "92177832",
+          "pais": "Guatemala",
+          "pasaporte": "",
+          "nombre": "DIEGO BENJAMIN SIBRIAN GRANDE"
+        },
+        {
+          "nit": "8338531",
+          "pais": "Guatemala",
+          "pasaporte": "",
+          "nombre": "OSCAR LEONEL SOTO PÉREZ"
+        },
+        {
+          "nit": "101936559",
+          "pais": "Guatemala",
+          "pasaporte": "",
+          "nombre": "OSCAR RICARDO PEÑA CHACON"
+        },
+        {
+          "nit": "26356279",
+          "pais": "Guatemala",
+          "pasaporte": "",
+          "nombre": "CÉSAR ESTUARDO HERNÁNDEZ VÉLIZ"
+        },
+        {
+          "nit": "1884018",
+          "pais": "Guatemala",
+          "pasaporte": "",
+          "nombre": "JAIME ESTUARDO ARAGON DIAZ"
+        },
+        {
+          "nit": "1650478K",
+          "pais": "Guatemala",
+          "pasaporte": "",
+          "nombre": "EDDY ESTUARDO ORTIZ LEMUS"
+        },
+        {
+          "nit": "60820896",
+          "pais": "Guatemala",
+          "pasaporte": "",
+          "nombre": "LUIS ALEJANDRO CACAO MAYORGA"
+        },
+        {
+          "nit": "89436482",
+          "pais": "Guatemala",
+          "pasaporte": "",
+          "nombre": "JOSÉ ANTONIO AYALA PERDOMO"
+        }
+      ],
+      "Comercios": [
+        {
+          "nombre": "TELGUA AGENCIA REFORMA",
+          "direccion": "6A. CALLE 7-73 1ER. NIVEL ZONA 9 GUATEMALA,GUATEMALA"
+        }
+      ],
+      "Especialidades": [],
+      "Solicitudes": [
+        {
+          "numero": "CPS2026122224",
+          "tipo": "Constancia adicional de precalificación de bienes, suministros y servicios",
+          "estado": "Finalizada",
+          "fechaAprobacion": "03/06/2026",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "CPS2026114796",
+          "tipo": "Constancia adicional de precalificación de bienes, suministros y servicios",
+          "estado": "Finalizada",
+          "fechaAprobacion": "04/05/2026",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "CPS2026106834",
+          "tipo": "Constancia adicional de precalificación de bienes, suministros y servicios",
+          "estado": "Finalizada",
+          "fechaAprobacion": "06/04/2026",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "CPS202694421",
+          "tipo": "Constancia adicional de precalificación de bienes, suministros y servicios",
+          "estado": "Finalizada",
+          "fechaAprobacion": "05/03/2026",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "CPS202677607",
+          "tipo": "Constancia adicional de precalificación de bienes, suministros y servicios",
+          "estado": "Finalizada",
+          "fechaAprobacion": "02/02/2026",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "ACSO202625493",
+          "tipo": "Actualización de inscripción de sociedad",
+          "estado": "Finalizada",
+          "fechaAprobacion": "15/01/2026",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "CPS202614434",
+          "tipo": "Constancia adicional de precalificación de bienes, suministros y servicios",
+          "estado": "Finalizada",
+          "fechaAprobacion": "05/01/2026",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "CPS2025168833",
+          "tipo": "Constancia adicional de precalificación de bienes, suministros y servicios",
+          "estado": "Finalizada",
+          "fechaAprobacion": "08/12/2025",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "CPS2025167989",
+          "tipo": "Constancia adicional de precalificación de bienes, suministros y servicios",
+          "estado": "Finalizada",
+          "fechaAprobacion": "01/12/2025",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "CPS2025162546",
+          "tipo": "Constancia adicional de precalificación de bienes, suministros y servicios",
+          "estado": "Finalizada",
+          "fechaAprobacion": "05/11/2025",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "CPS2025156986",
+          "tipo": "Constancia adicional de precalificación de bienes, suministros y servicios",
+          "estado": "Finalizada",
+          "fechaAprobacion": "14/10/2025",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "PREP2025144661",
+          "tipo": "Precalificación proveedores de bienes, suministros y servicios",
+          "estado": "Finalizada",
+          "fechaAprobacion": "29/09/2025",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "CPS2025149171",
+          "tipo": "Constancia adicional de precalificación de bienes, suministros y servicios",
+          "estado": "Finalizada",
+          "fechaAprobacion": "01/09/2025",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "CPS2025142097",
+          "tipo": "Constancia adicional de precalificación de bienes, suministros y servicios",
+          "estado": "Finalizada",
+          "fechaAprobacion": "01/08/2025",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "CPS2025135232",
+          "tipo": "Constancia adicional de precalificación de bienes, suministros y servicios",
+          "estado": "Finalizada",
+          "fechaAprobacion": "04/07/2025",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "APTR2025120355",
+          "tipo": "Ampliación de Proveedores Transparentes",
+          "estado": "Finalizada",
+          "fechaAprobacion": "18/06/2025",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "CPS2025126530",
+          "tipo": "Constancia adicional de precalificación de bienes, suministros y servicios",
+          "estado": "Finalizada",
+          "fechaAprobacion": "05/06/2025",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "CPS2025116491",
+          "tipo": "Constancia adicional de precalificación de bienes, suministros y servicios",
+          "estado": "Finalizada",
+          "fechaAprobacion": "05/05/2025",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "CPS2025107503",
+          "tipo": "Constancia adicional de precalificación de bienes, suministros y servicios",
+          "estado": "Finalizada",
+          "fechaAprobacion": "07/04/2025",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "CPS202593510",
+          "tipo": "Constancia adicional de precalificación de bienes, suministros y servicios",
+          "estado": "Finalizada",
+          "fechaAprobacion": "04/03/2025",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "CPS202577934",
+          "tipo": "Constancia adicional de precalificación de bienes, suministros y servicios",
+          "estado": "Finalizada",
+          "fechaAprobacion": "06/02/2025",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "ACSO202533420",
+          "tipo": "Actualización de inscripción de sociedad",
+          "estado": "Finalizada",
+          "fechaAprobacion": "28/01/2025",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "CPS202534586",
+          "tipo": "Constancia adicional de precalificación de bienes, suministros y servicios",
+          "estado": "Finalizada",
+          "fechaAprobacion": "10/01/2025",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "RDP2024144594",
+          "tipo": "Recaudo de Pago de Arancel",
+          "estado": "Finalizada",
+          "fechaAprobacion": "05/12/2024",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "CPS2024143947",
+          "tipo": "Constancia adicional de precalificación de bienes, suministros y servicios",
+          "estado": "Finalizada",
+          "fechaAprobacion": "02/12/2024",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "CPS2024140845",
+          "tipo": "Constancia adicional de precalificación de bienes, suministros y servicios",
+          "estado": "Finalizada",
+          "fechaAprobacion": "12/11/2024",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "CPS2024132439",
+          "tipo": "Constancia adicional de precalificación de bienes, suministros y servicios",
+          "estado": "Finalizada",
+          "fechaAprobacion": "03/10/2024",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "CPS2024124829",
+          "tipo": "Constancia adicional de precalificación de bienes, suministros y servicios",
+          "estado": "Finalizada",
+          "fechaAprobacion": "02/09/2024",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "CPS2024118166",
+          "tipo": "Constancia adicional de precalificación de bienes, suministros y servicios",
+          "estado": "Finalizada",
+          "fechaAprobacion": "01/08/2024",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "CPS2024112650",
+          "tipo": "Constancia adicional de precalificación de bienes, suministros y servicios",
+          "estado": "Finalizada",
+          "fechaAprobacion": "04/07/2024",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "CPS2024107299",
+          "tipo": "Constancia adicional de precalificación de bienes, suministros y servicios",
+          "estado": "Finalizada",
+          "fechaAprobacion": "07/06/2024",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "CPS2024104709",
+          "tipo": "Constancia adicional de precalificación de bienes, suministros y servicios",
+          "estado": "Finalizada",
+          "fechaAprobacion": "30/05/2024",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "CPS202498577",
+          "tipo": "Constancia adicional de precalificación de bienes, suministros y servicios",
+          "estado": "Finalizada",
+          "fechaAprobacion": "06/05/2024",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "CPS202496815",
+          "tipo": "Constancia adicional de precalificación de bienes, suministros y servicios",
+          "estado": "Finalizada",
+          "fechaAprobacion": "29/04/2024",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "CPS202486981",
+          "tipo": "Constancia adicional de precalificación de bienes, suministros y servicios",
+          "estado": "Finalizada",
+          "fechaAprobacion": "03/04/2024",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "CPS202483920",
+          "tipo": "Constancia adicional de precalificación de bienes, suministros y servicios",
+          "estado": "Finalizada",
+          "fechaAprobacion": "21/03/2024",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "CPS202475414",
+          "tipo": "Constancia adicional de precalificación de bienes, suministros y servicios",
+          "estado": "Finalizada",
+          "fechaAprobacion": "04/03/2024",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "CPS202459513",
+          "tipo": "Constancia adicional de precalificación de bienes, suministros y servicios",
+          "estado": "Finalizada",
+          "fechaAprobacion": "02/02/2024",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "ACSO202413159",
+          "tipo": "Actualización de inscripción de sociedad",
+          "estado": "Finalizada",
+          "fechaAprobacion": "09/01/2024",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "CPS2023159048",
+          "tipo": "Constancia adicional de precalificación de bienes, suministros y servicios",
+          "estado": "Finalizada",
+          "fechaAprobacion": "28/12/2023",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "CPS2023130946",
+          "tipo": "Constancia adicional de precalificación de bienes, suministros y servicios",
+          "estado": "Finalizada",
+          "fechaAprobacion": "01/12/2023",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "LIBS2023129310",
+          "tipo": "Liberacion de Saldos",
+          "estado": "Finalizada",
+          "fechaAprobacion": "17/11/2023",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "CPS2023127842",
+          "tipo": "Constancia adicional de precalificación de bienes, suministros y servicios",
+          "estado": "Finalizada",
+          "fechaAprobacion": "03/11/2023",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "LIBS2023123667",
+          "tipo": "Liberacion de Saldos",
+          "estado": "Finalizada",
+          "fechaAprobacion": "31/10/2023",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "ACSO2023123649",
+          "tipo": "Actualización de inscripción de sociedad",
+          "estado": "Finalizada",
+          "fechaAprobacion": "09/10/2023",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "PREP2023114562",
+          "tipo": "Precalificación proveedores de bienes, suministros y servicios",
+          "estado": "Finalizada",
+          "fechaAprobacion": "25/09/2023",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "CPS2023117872",
+          "tipo": "Constancia adicional de precalificación de bienes, suministros y servicios",
+          "estado": "Finalizada",
+          "fechaAprobacion": "11/08/2023",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "ACSO2023109358",
+          "tipo": "Actualización de inscripción de sociedad",
+          "estado": "Finalizada",
+          "fechaAprobacion": "25/07/2023",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "CPS2023110725",
+          "tipo": "Constancia adicional de precalificación de bienes, suministros y servicios",
+          "estado": "Finalizada",
+          "fechaAprobacion": "05/07/2023",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "CPS2023104625",
+          "tipo": "Constancia adicional de precalificación de bienes, suministros y servicios",
+          "estado": "Finalizada",
+          "fechaAprobacion": "01/06/2023",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "CPS202399550",
+          "tipo": "Constancia adicional de precalificación de bienes, suministros y servicios",
+          "estado": "Finalizada",
+          "fechaAprobacion": "08/05/2023",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "CPS202393611",
+          "tipo": "Constancia adicional de precalificación de bienes, suministros y servicios",
+          "estado": "Finalizada",
+          "fechaAprobacion": "13/04/2023",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "CPS202388030",
+          "tipo": "Constancia adicional de precalificación de bienes, suministros y servicios",
+          "estado": "Finalizada",
+          "fechaAprobacion": "23/03/2023",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "LIBS202370272",
+          "tipo": "Liberacion de Saldos",
+          "estado": "Finalizada",
+          "fechaAprobacion": "15/03/2023",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "CPS202376957",
+          "tipo": "Constancia adicional de precalificación de bienes, suministros y servicios",
+          "estado": "Finalizada",
+          "fechaAprobacion": "23/02/2023",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "ACSO2022161079",
+          "tipo": "Actualización de inscripción de sociedad",
+          "estado": "Finalizada",
+          "fechaAprobacion": "20/01/2023",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "CPS2022135102",
+          "tipo": "Constancia adicional de precalificación de bienes, suministros y servicios",
+          "estado": "Finalizada",
+          "fechaAprobacion": "01/12/2022",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "CPS2022126648",
+          "tipo": "Constancia adicional de precalificación de bienes, suministros y servicios",
+          "estado": "Finalizada",
+          "fechaAprobacion": "03/10/2022",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "CPS2022119803",
+          "tipo": "Constancia adicional de precalificación de bienes, suministros y servicios",
+          "estado": "Finalizada",
+          "fechaAprobacion": "17/08/2022",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "CPS2022106760",
+          "tipo": "Constancia adicional de precalificación de bienes, suministros y servicios",
+          "estado": "Finalizada",
+          "fechaAprobacion": "03/06/2022",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "CPS202299697",
+          "tipo": "Constancia adicional de precalificación de bienes, suministros y servicios",
+          "estado": "Finalizada",
+          "fechaAprobacion": "03/05/2022",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "CPS202286638",
+          "tipo": "Constancia adicional de precalificación de bienes, suministros y servicios",
+          "estado": "Finalizada",
+          "fechaAprobacion": "09/03/2022",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "ACSO2021146641",
+          "tipo": "Actualización de inscripción de sociedad",
+          "estado": "Finalizada",
+          "fechaAprobacion": "17/01/2022",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "CPS2021146517",
+          "tipo": "Constancia adicional de precalificación de bienes, suministros y servicios",
+          "estado": "Finalizada",
+          "fechaAprobacion": "07/12/2021",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "MOBS2021130052",
+          "tipo": "Modificación de Proveedores de Bienes, Suministros y Servicios",
+          "estado": "Finalizada",
+          "fechaAprobacion": "01/10/2021",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "LIBS2021128697",
+          "tipo": "Liberacion de Saldos",
+          "estado": "Finalizada",
+          "fechaAprobacion": "01/09/2021",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "MOBS2021127656",
+          "tipo": "Modificación de Proveedores de Bienes, Suministros y Servicios",
+          "estado": "Finalizada",
+          "fechaAprobacion": "16/08/2021",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "PREP2021121856",
+          "tipo": "Precalificación proveedores de bienes, suministros y servicios",
+          "estado": "Finalizada",
+          "fechaAprobacion": "13/08/2021",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "CPS2021120902",
+          "tipo": "Constancia adicional de precalificación de bienes, suministros y servicios",
+          "estado": "Finalizada",
+          "fechaAprobacion": "15/07/2021",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "CPS2021110547",
+          "tipo": "Constancia adicional de precalificación de bienes, suministros y servicios",
+          "estado": "Finalizada",
+          "fechaAprobacion": "01/06/2021",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "CPS2021103523",
+          "tipo": "Constancia adicional de precalificación de bienes, suministros y servicios",
+          "estado": "Finalizada",
+          "fechaAprobacion": "19/04/2021",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "CPS202193006",
+          "tipo": "Constancia adicional de precalificación de bienes, suministros y servicios",
+          "estado": "Finalizada",
+          "fechaAprobacion": "12/03/2021",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "ACSO202171594",
+          "tipo": "Actualización de inscripción de sociedad",
+          "estado": "Finalizada",
+          "fechaAprobacion": "04/02/2021",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "CPS202149699",
+          "tipo": "Constancia adicional de precalificación de bienes, suministros y servicios",
+          "estado": "Finalizada",
+          "fechaAprobacion": "21/01/2021",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "CPS2020128145",
+          "tipo": "Constancia adicional de precalificación de bienes, suministros y servicios",
+          "estado": "Finalizada",
+          "fechaAprobacion": "15/12/2020",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "CPS2020122764",
+          "tipo": "Constancia adicional de precalificación de bienes, suministros y servicios",
+          "estado": "Finalizada",
+          "fechaAprobacion": "13/11/2020",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "CPS2020116527",
+          "tipo": "Constancia adicional de precalificación de bienes, suministros y servicios",
+          "estado": "Finalizada",
+          "fechaAprobacion": "15/10/2020",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "ACSO2020106374",
+          "tipo": "Actualización de inscripción de sociedad",
+          "estado": "Finalizada",
+          "fechaAprobacion": "09/09/2020",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "CPS2020105043",
+          "tipo": "Constancia adicional de precalificación de bienes, suministros y servicios",
+          "estado": "Finalizada",
+          "fechaAprobacion": "24/08/2020",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "PREP202092561",
+          "tipo": "Precalificación proveedores de bienes, suministros y servicios",
+          "estado": "Finalizada",
+          "fechaAprobacion": "24/07/2020",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "CPS202096840",
+          "tipo": "Constancia adicional de precalificación de bienes, suministros y servicios",
+          "estado": "Finalizada",
+          "fechaAprobacion": "14/07/2020",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "CPS202082099",
+          "tipo": "Constancia adicional de precalificación de bienes, suministros y servicios",
+          "estado": "Finalizada",
+          "fechaAprobacion": "09/05/2020",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "MOBS202065302",
+          "tipo": "Modificación de Proveedores de Bienes, Suministros y Servicios",
+          "estado": "Finalizada",
+          "fechaAprobacion": "13/03/2020",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "ACSO202021378",
+          "tipo": "Actualización de inscripción de sociedad",
+          "estado": "Finalizada",
+          "fechaAprobacion": "06/02/2020",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "CPS201980414",
+          "tipo": "Constancia adicional de precalificación de bienes, suministros y servicios",
+          "estado": "Finalizada",
+          "fechaAprobacion": "28/10/2019",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "CPS201975039",
+          "tipo": "Constancia adicional de precalificación de bienes, suministros y servicios",
+          "estado": "Finalizada",
+          "fechaAprobacion": "06/09/2019",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "IPRP201960370",
+          "tipo": "Inscripción y precalificación sociedad proveedores de bienes, suministros y servicios",
+          "estado": "Finalizada",
+          "fechaAprobacion": "22/07/2019",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "CTP20183210",
+          "tipo": "Inscripcion y precalificacion transitoria Bienes y Servicios",
+          "estado": "Finalizada",
+          "fechaAprobacion": "30/11/2018",
+          "constancia": "",
+          "resolucion": ""
+        }
+      ]
+    }
+  },
+  {
+    "nit": "42678447",
+    "url": "https://sistema.rgae.gob.gt/consulta-proveedores/proveedor/42678447?source=guatecompras",
+    "status": "ENCONTRADO",
+    "data": {
+      "NIT": "42678447",
+      "Nombre o razón social": "JOSÉ CARLOS MÉRIDA MORALES",
+      "Estado Actual": "No Actualizado",
+      "Fecha de Inscripción": "16/02/2021",
+      "Representantes": [],
+      "Comercios": [],
+      "Especialidades": [],
+      "Solicitudes": [
+        {
+          "numero": "APT2021154558",
+          "tipo": "Actualización de Inscripción de Personal Temporal Profesional",
+          "estado": "Finalizada",
+          "fechaAprobacion": "01/01/2022",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "APT2021146603",
+          "tipo": "Actualización de Inscripción de Personal Temporal Profesional",
+          "estado": "Finalizada",
+          "fechaAprobacion": "08/12/2021",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "IPT202173616",
+          "tipo": "Inscripción personal temporal -profesional-",
+          "estado": "Finalizada",
+          "fechaAprobacion": "16/02/2021",
+          "constancia": "",
+          "resolucion": ""
+        }
+      ]
+    }
+  },
+  {
+    "nit": "7378106",
+    "url": "https://sistema.rgae.gob.gt/consulta-proveedores/proveedor/7378106?source=guatecompras",
+    "status": "ENCONTRADO",
+    "data": {
+      "NIT": "7378106",
+      "Nombre o razón social": "OPERADORA DE TIENDAS, SOCIEDAD ANONIMA",
+      "Representantes": [],
+      "Comercios": [],
+      "Especialidades": [],
+      "Solicitudes": []
+    }
+  },
+  {
+    "nit": "28132874",
+    "url": "https://sistema.rgae.gob.gt/consulta-proveedores/proveedor/28132874?source=guatecompras",
+    "status": "ENCONTRADO",
+    "data": {
+      "NIT": "28132874",
+      "Nombre o razón social": "JOSUE ALEXANDER CHACON DIAZ",
+      "Representantes": [],
+      "Comercios": [],
+      "Especialidades": [],
+      "Solicitudes": []
+    }
+  },
+  {
+    "nit": "45871507",
+    "url": "https://sistema.rgae.gob.gt/consulta-proveedores/proveedor/45871507?source=guatecompras",
+    "status": "ENCONTRADO",
+    "data": {
+      "NIT": "45871507",
+      "Nombre o razón social": "ESTELA MARÍA SOLÓRZANO TRUJILLO",
+      "Representantes": [],
+      "Comercios": [],
+      "Especialidades": [],
+      "Solicitudes": []
+    }
+  },
+  {
+    "nit": "27706737",
+    "url": "https://sistema.rgae.gob.gt/consulta-proveedores/proveedor/27706737?source=guatecompras",
+    "status": "ENCONTRADO",
+    "data": {
+      "NIT": "27706737",
+      "Nombre o razón social": "ROGER IVAN MÉNDEZ GARCÍA",
+      "Representantes": [],
+      "Comercios": [],
+      "Especialidades": [],
+      "Solicitudes": []
+    }
+  },
+  {
+    "nit": "25227696",
+    "url": "https://sistema.rgae.gob.gt/consulta-proveedores/proveedor/25227696?source=guatecompras",
+    "status": "ENCONTRADO",
+    "data": {
+      "NIT": "25227696",
+      "Nombre o razón social": "LEONEL  GRANADOS AZURDIA",
+      "Representantes": [],
+      "Comercios": [],
+      "Especialidades": [],
+      "Solicitudes": []
+    }
+  },
+  {
+    "nit": "326445",
+    "url": "https://sistema.rgae.gob.gt/consulta-proveedores/proveedor/326445?source=guatecompras",
+    "status": "ENCONTRADO",
+    "data": {
+      "NIT": "326445",
+      "Nombre o razón social": "EMPRESA ELECTRICA DE GUATEMALA SOCIEDAD ANONIMA",
+      "Estado Actual": "Precalificado",
+      "Fecha de Inscripción": "26/07/2019",
+      "Fecha Última Precalificación": "04/05/2026",
+      "Tipo de Precalificación": "Precalificacion de Bienes, Servicios y Suministros",
+      "Vigencia de Última Precalificación": "04/05/2028",
+      "Representantes": [
+        {
+          "nit": "29431980",
+          "pais": "Guatemala",
+          "pasaporte": "",
+          "nombre": "JOSÉ BENITO GARCÍA CRUZ"
+        },
+        {
+          "nit": "22685960",
+          "pais": "Guatemala",
+          "pasaporte": "",
+          "nombre": "JUAN ANGEL GARCIA TUBAC"
+        },
+        {
+          "nit": "42157536",
+          "pais": "Guatemala",
+          "pasaporte": "",
+          "nombre": "KARLA MARIA FLORES ESTRADA"
+        },
+        {
+          "nit": "107200295",
+          "pais": "Guatemala",
+          "pasaporte": "",
+          "nombre": "MARIO ALBERTO NARANJO ECHEVERRI"
+        },
+        {
+          "nit": "7700342",
+          "pais": "Guatemala",
+          "pasaporte": "",
+          "nombre": "RICARDO ALFREDO MENDEZ TELLO"
+        },
+        {
+          "nit": "67555209",
+          "pais": "Guatemala",
+          "pasaporte": "",
+          "nombre": "IRIS YOHANA CALEL SANTOS"
+        },
+        {
+          "nit": "40419533",
+          "pais": "Guatemala",
+          "pasaporte": "",
+          "nombre": "JOSUÉ ALEJANDRO FIGUEROA NIMATUJ"
+        },
+        {
+          "nit": "47526998",
+          "pais": "Guatemala",
+          "pasaporte": "",
+          "nombre": "MARÍA VICTORIA BALCÁRCEL PALENCIA"
+        },
+        {
+          "nit": "37275607",
+          "pais": "Guatemala",
+          "pasaporte": "",
+          "nombre": "DIEGO BERNARDO LAINFIESTA LOPEZ"
+        },
+        {
+          "nit": "7286708",
+          "pais": "Guatemala",
+          "pasaporte": "",
+          "nombre": "JOSÉ ROBERTO ARTURO PAIZ POLANCO"
+        },
+        {
+          "nit": "62492772",
+          "pais": "Guatemala",
+          "pasaporte": "",
+          "nombre": "EDUARDO ROBERTO TEZEN ARDON"
+        }
+      ],
+      "Comercios": [
+        {
+          "nombre": "EMPRESA ELECTRICA DE GUATEMALA S.A.",
+          "direccion": "6 AVENIDA 8-14 ZONA 1 GUATEMALA,GUATEMALA"
+        },
+        {
+          "nombre": "EEGSA GDR",
+          "direccion": "6 AVENIDA 8-14 ZONA 1 GUATEMALA,GUATEMALA"
+        }
+      ],
+      "Especialidades": [],
+      "Solicitudes": [
+        {
+          "numero": "PREP2026101461",
+          "tipo": "Precalificación proveedores de bienes, suministros y servicios",
+          "estado": "Finalizada",
+          "fechaAprobacion": "04/05/2026",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "ACSO2025201144",
+          "tipo": "Actualización de inscripción de sociedad",
+          "estado": "Finalizada",
+          "fechaAprobacion": "03/02/2026",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "APTR2025116801",
+          "tipo": "Ampliación de Proveedores Transparentes",
+          "estado": "Finalizada",
+          "fechaAprobacion": "20/06/2025",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "ACSO2024170860",
+          "tipo": "Actualización de inscripción de sociedad",
+          "estado": "Finalizada",
+          "fechaAprobacion": "13/02/2025",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "PREP202456384",
+          "tipo": "Precalificación proveedores de bienes, suministros y servicios",
+          "estado": "Finalizada",
+          "fechaAprobacion": "19/04/2024",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "ACSO2023142700",
+          "tipo": "Actualización de inscripción de sociedad",
+          "estado": "Finalizada",
+          "fechaAprobacion": "22/01/2024",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "ACSO2022136255",
+          "tipo": "Actualización de inscripción de sociedad",
+          "estado": "Finalizada",
+          "fechaAprobacion": "27/01/2023",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "ACSO2021165510",
+          "tipo": "Actualización de inscripción de sociedad",
+          "estado": "Finalizada",
+          "fechaAprobacion": "16/02/2022",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "PREP2021116581",
+          "tipo": "Precalificación proveedores de bienes, suministros y servicios",
+          "estado": "Finalizada",
+          "fechaAprobacion": "24/11/2021",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "ACSO202185502",
+          "tipo": "Actualización de inscripción de sociedad",
+          "estado": "Finalizada",
+          "fechaAprobacion": "16/04/2021",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "PREP202094644",
+          "tipo": "Precalificación proveedores de bienes, suministros y servicios",
+          "estado": "Finalizada",
+          "fechaAprobacion": "15/07/2020",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "MOBS202053647",
+          "tipo": "Modificación de Proveedores de Bienes, Suministros y Servicios",
+          "estado": "Finalizada",
+          "fechaAprobacion": "28/02/2020",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "ACSO202048404",
+          "tipo": "Actualización de inscripción de sociedad",
+          "estado": "Finalizada",
+          "fechaAprobacion": "06/02/2020",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "IPRP201955670",
+          "tipo": "Inscripción y precalificación sociedad proveedores de bienes, suministros y servicios",
+          "estado": "Finalizada",
+          "fechaAprobacion": "26/07/2019",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "CTP20181684",
+          "tipo": "Inscripcion y precalificacion transitoria Bienes y Servicios",
+          "estado": "Finalizada",
+          "fechaAprobacion": "27/11/2018",
+          "constancia": "",
+          "resolucion": ""
+        }
+      ]
+    }
+  },
+  {
+    "nit": "1817129K",
+    "url": "https://sistema.rgae.gob.gt/consulta-proveedores/proveedor/1817129K?source=guatecompras",
+    "status": "ENCONTRADO",
+    "data": {
+      "NIT": "1817129K",
+      "Nombre o razón social": "YOLANDA DEL ROSARIO AGUILAR GÓMEZ DE SAC",
+      "Representantes": [],
+      "Comercios": [],
+      "Especialidades": [],
+      "Solicitudes": []
+    }
+  },
+  {
+    "nit": "1726328K",
+    "url": "https://sistema.rgae.gob.gt/consulta-proveedores/proveedor/1726328K?source=guatecompras",
+    "status": "ENCONTRADO",
+    "data": {
+      "NIT": "1726328K",
+      "Nombre o razón social": "GERSON  URBINA RUIZ",
+      "Estado Actual": "Inscrito",
+      "Fecha de Inscripción": "13/06/2019",
+      "Fecha Última Precalificación": "13/06/2019",
+      "Tipo de Precalificación": "Precalificacion de Bienes, Servicios y Suministros",
+      "Vigencia de Última Precalificación": "13/06/2020",
+      "Representantes": [],
+      "Comercios": [
+        {
+          "nombre": "D'TECNICA DE EQUIPOS",
+          "direccion": "10 CALLE OF 106 9-68 ZONA 1 ED. ROSANCA GUATEMALA,GUATEMALA"
+        }
+      ],
+      "Especialidades": [],
+      "Solicitudes": [
+        {
+          "numero": "ACCI202638477",
+          "tipo": "Actualización de inscripción de comerciante individual",
+          "estado": "Finalizada",
+          "fechaAprobacion": "14/01/2026",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "ACCI202523543",
+          "tipo": "Actualización de inscripción de comerciante individual",
+          "estado": "Finalizada",
+          "fechaAprobacion": "17/01/2025",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "ACCI20246015",
+          "tipo": "Actualización de inscripción de comerciante individual",
+          "estado": "Finalizada",
+          "fechaAprobacion": "05/02/2024",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "ACCI202351780",
+          "tipo": "Actualización de inscripción de comerciante individual",
+          "estado": "Finalizada",
+          "fechaAprobacion": "03/02/2023",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "ACCI202249439",
+          "tipo": "Actualización de inscripción de comerciante individual",
+          "estado": "Finalizada",
+          "fechaAprobacion": "02/03/2022",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "ACCI202158833",
+          "tipo": "Actualización de inscripción de comerciante individual",
+          "estado": "Finalizada",
+          "fechaAprobacion": "04/02/2021",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "ACCI202060746",
+          "tipo": "Actualización de inscripción de comerciante individual",
+          "estado": "Finalizada",
+          "fechaAprobacion": "02/03/2020",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "IPRP201923801",
+          "tipo": "Inscripción y precalificación comerciante individual proveedores de bienes, suministros y servicios",
+          "estado": "Finalizada",
+          "fechaAprobacion": "13/06/2019",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "CTP201923799",
+          "tipo": "Inscripcion y precalificacion transitoria Bienes y Servicios",
+          "estado": "Finalizada",
+          "fechaAprobacion": "08/02/2019",
+          "constancia": "",
+          "resolucion": ""
+        }
+      ]
+    }
+  },
+  {
+    "nit": "38505800",
+    "url": "https://sistema.rgae.gob.gt/consulta-proveedores/proveedor/38505800?source=guatecompras",
+    "status": "ENCONTRADO",
+    "data": {
+      "NIT": "38505800",
+      "Nombre o razón social": "HENRY STUARDO MENÉNDEZ ESCOBAR",
+      "Estado Actual": "No Actualizado",
+      "Fecha de Inscripción": "25/01/2019",
+      "Representantes": [],
+      "Comercios": [],
+      "Especialidades": [],
+      "Solicitudes": [
+        {
+          "numero": "APT2021155040",
+          "tipo": "Actualización de Inscripción de Personal Temporal Profesional",
+          "estado": "Finalizada",
+          "fechaAprobacion": "01/01/2022",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "INSC2021114787",
+          "tipo": "Inscripción de Comerciante Individual",
+          "estado": "Finalizada",
+          "fechaAprobacion": "12/07/2021",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "APT202154632",
+          "tipo": "Actualización de Inscripción de Personal Temporal Profesional",
+          "estado": "Finalizada",
+          "fechaAprobacion": "20/01/2021",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "APT202011821",
+          "tipo": "Actualización de Inscripción de Personal Temporal Profesional",
+          "estado": "Finalizada",
+          "fechaAprobacion": "20/01/2020",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "IPT201917807",
+          "tipo": "Inscripción personal temporal -profesional-",
+          "estado": "Finalizada",
+          "fechaAprobacion": "25/01/2019",
+          "constancia": "",
+          "resolucion": ""
+        }
+      ]
+    }
+  },
+  {
+    "nit": "23451866",
+    "url": "https://sistema.rgae.gob.gt/consulta-proveedores/proveedor/23451866?source=guatecompras",
+    "status": "ENCONTRADO",
+    "data": {
+      "NIT": "23451866",
+      "Nombre o razón social": "EDWIN OSMIN MUÑOZ SALAZAR",
+      "Representantes": [],
+      "Comercios": [],
+      "Especialidades": [],
+      "Solicitudes": []
+    }
+  },
+  {
+    "nit": "27654966",
+    "url": "https://sistema.rgae.gob.gt/consulta-proveedores/proveedor/27654966?source=guatecompras",
+    "status": "ENCONTRADO",
+    "data": {
+      "NIT": "27654966",
+      "Nombre o razón social": "WENDY KARINA LOPEZ MARTINEZ",
+      "Representantes": [],
+      "Comercios": [],
+      "Especialidades": [],
+      "Solicitudes": []
+    }
+  },
+  {
+    "nit": "16139879",
+    "url": "https://sistema.rgae.gob.gt/consulta-proveedores/proveedor/16139879?source=guatecompras",
+    "status": "ENCONTRADO",
+    "data": {
+      "NIT": "16139879",
+      "Nombre o razón social": "ANGELA IMELDA DE LEÓN ZACARÍAS",
+      "Representantes": [],
+      "Comercios": [],
+      "Especialidades": [],
+      "Solicitudes": []
+    }
+  },
+  {
+    "nit": "20284373",
+    "url": "https://sistema.rgae.gob.gt/consulta-proveedores/proveedor/20284373?source=guatecompras",
+    "status": "ENCONTRADO",
+    "data": {
+      "NIT": "20284373",
+      "Nombre o razón social": "CESAR ORLANDO FIGUEROA RODAS",
+      "Estado Actual": "No Actualizado",
+      "Fecha de Inscripción": "26/01/2019",
+      "Fecha Última Precalificación": "26/01/2019",
+      "Tipo de Precalificación": "Precalificacion de Consultor Individual",
+      "Vigencia de Última Precalificación": "31/12/2019",
+      "Representantes": [],
+      "Comercios": [],
+      "Especialidades": [],
+      "Solicitudes": [
+        {
+          "numero": "IPRC20184424",
+          "tipo": "Inscripción y precalificación consultores individuales",
+          "estado": "Finalizada",
+          "fechaAprobacion": "26/01/2019",
+          "constancia": "",
+          "resolucion": ""
+        }
+      ]
+    }
+  },
+  {
+    "nit": "15972364",
+    "url": "https://sistema.rgae.gob.gt/consulta-proveedores/proveedor/15972364?source=guatecompras",
+    "status": "ENCONTRADO",
+    "data": {
+      "NIT": "15972364",
+      "Nombre o razón social": "MANUEL DE JESUS HERNÁNDEZ AJ",
+      "Representantes": [],
+      "Comercios": [],
+      "Especialidades": [],
+      "Solicitudes": []
+    }
+  },
+  {
+    "nit": "59415800",
+    "url": "https://sistema.rgae.gob.gt/consulta-proveedores/proveedor/59415800?source=guatecompras",
+    "status": "ENCONTRADO",
+    "data": {
+      "NIT": "59415800",
+      "Nombre o razón social": "JUAN MANUEL CANTORAL RIVERA",
+      "Representantes": [],
+      "Comercios": [],
+      "Especialidades": [],
+      "Solicitudes": []
+    }
+  },
+  {
+    "nit": "5139341",
+    "url": "https://sistema.rgae.gob.gt/consulta-proveedores/proveedor/5139341?source=guatecompras",
+    "status": "ENCONTRADO",
+    "data": {
+      "NIT": "5139341",
+      "Nombre o razón social": "AHMED RICARDO ARTURO ABDALLA ALVAREZ",
+      "Estado Actual": "No Actualizado",
+      "Fecha de Inscripción": "01/02/2019",
+      "Representantes": [],
+      "Comercios": [],
+      "Especialidades": [],
+      "Solicitudes": [
+        {
+          "numero": "APT202522713",
+          "tipo": "Actualización de Inscripción de Personal Temporal Profesional",
+          "estado": "Finalizada",
+          "fechaAprobacion": "09/01/2025",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "APT202418620",
+          "tipo": "Actualización de Inscripción de Personal Temporal Profesional",
+          "estado": "Finalizada",
+          "fechaAprobacion": "10/01/2024",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "APT202386107",
+          "tipo": "Actualización de Inscripción de Personal Temporal Profesional",
+          "estado": "Finalizada",
+          "fechaAprobacion": "16/03/2023",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "APT20229840",
+          "tipo": "Actualización de Inscripción de Personal Temporal Profesional",
+          "estado": "Finalizada",
+          "fechaAprobacion": "06/01/2022",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "APT202121245",
+          "tipo": "Actualización de Inscripción de Personal Temporal Profesional",
+          "estado": "Finalizada",
+          "fechaAprobacion": "06/01/2021",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "APT202022843",
+          "tipo": "Actualización de Inscripción de Personal Temporal Profesional",
+          "estado": "Finalizada",
+          "fechaAprobacion": "13/01/2020",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "IPT201826736",
+          "tipo": "Inscripción personal temporal -profesional-",
+          "estado": "Finalizada",
+          "fechaAprobacion": "01/02/2019",
+          "constancia": "",
+          "resolucion": ""
+        }
+      ]
+    }
+  },
+  {
+    "nit": "23438495",
+    "url": "https://sistema.rgae.gob.gt/consulta-proveedores/proveedor/23438495?source=guatecompras",
+    "status": "ENCONTRADO",
+    "data": {
+      "NIT": "23438495",
+      "Nombre o razón social": "MOISES GUILLERMO ORANTES VASQUEZ",
+      "Representantes": [],
+      "Comercios": [],
+      "Especialidades": [],
+      "Solicitudes": []
+    }
+  },
+  {
+    "nit": "26532476",
+    "url": "https://sistema.rgae.gob.gt/consulta-proveedores/proveedor/26532476?source=guatecompras",
+    "status": "ENCONTRADO",
+    "data": {
+      "NIT": "26532476",
+      "Nombre o razón social": "UNISUPER, SOCIEDAD ANONIMA",
+      "Representantes": [],
+      "Comercios": [],
+      "Especialidades": [],
+      "Solicitudes": []
+    }
+  },
+  {
+    "nit": "27622193",
+    "url": "https://sistema.rgae.gob.gt/consulta-proveedores/proveedor/27622193?source=guatecompras",
+    "status": "ENCONTRADO",
+    "data": {
+      "NIT": "27622193",
+      "Nombre o razón social": "JOSÉ AROLDO CAMEY COJOC",
+      "Representantes": [],
+      "Comercios": [],
+      "Especialidades": [],
+      "Solicitudes": []
+    }
+  },
+  {
+    "nit": "61447463",
+    "url": "https://sistema.rgae.gob.gt/consulta-proveedores/proveedor/61447463?source=guatecompras",
+    "status": "ENCONTRADO",
+    "data": {
+      "NIT": "61447463",
+      "Nombre o razón social": "EDER ORMANDY MARROQUIN ANTONIO",
+      "Representantes": [],
+      "Comercios": [],
+      "Especialidades": [],
+      "Solicitudes": []
+    }
+  },
+  {
+    "nit": "81059485",
+    "url": "https://sistema.rgae.gob.gt/consulta-proveedores/proveedor/81059485?source=guatecompras",
+    "status": "ENCONTRADO",
+    "data": {
+      "Representantes": [],
+      "Comercios": [],
+      "Especialidades": [],
+      "Solicitudes": []
+    }
+  }
+]

@@ -1,0 +1,20 @@
+__RUN_START__:1784172992142
+📋 NITs cargados desde archivo: 29 registros
+TIMEOUT_GENERAL5
+TIMEOUT_WAIT_CLOUDFLARE15
+
+🚀 RGAE Scraper — 29 NITs
+
+🌐 Abriendo navegador Chrome...
+   Usando Chrome por defecto en Windows: C:\Program Files\Google\Chrome\Application\chrome.exe
+   Modo Headless: false
+   Navegando al primer NIT...
+TimeoutError: Navigation timeout of 5000 ms exceeded
+    at new Deferred (C:\Users\JM200506\Documents\GitHub\rgae\node_modules\puppeteer-core\lib\cjs\puppeteer\util\Deferred.js:54:34)
+    at Deferred.create (C:\Users\JM200506\Documents\GitHub\rgae\node_modules\puppeteer-core\lib\cjs\puppeteer\util\Deferred.js:16:16)
+    at new LifecycleWatcher (C:\Users\JM200506\Documents\GitHub\rgae\node_modules\puppeteer-core\lib\cjs\puppeteer\cdp\LifecycleWatcher.js:65:60)
+    at CdpFrame.goto (C:\Users\JM200506\Documents\GitHub\rgae\node_modules\puppeteer-core\lib\cjs\puppeteer\cdp\Frame.js:135:29)
+    at CdpFrame.<anonymous> (C:\Users\JM200506\Documents\GitHub\rgae\node_modules\puppeteer-core\lib\cjs\puppeteer\util\decorators.js:98:27)
+    at CdpPage.goto (C:\Users\JM200506\Documents\GitHub\rgae\node_modules\puppeteer-core\lib\cjs\puppeteer\api\Page.js:603:43)
+    at main (C:\Users\JM200506\Documents\GitHub\rgae\index.js:391:14)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
