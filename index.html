@@ -79,17 +79,96 @@
     }
 
     .stats-card {
-      background: white;
-      border-radius: 12px;
-      padding: 20px;
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(226, 232, 240, 0.8);
+      border-radius: 16px;
+      padding: 24px;
       text-align: center;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+      transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .stats-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 35px rgba(26, 54, 93, 0.08);
+      border-color: rgba(26, 54, 93, 0.3);
+    }
+
+    .stats-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .stats-card:hover::before {
+      opacity: 1;
     }
 
     .stats-number {
-      font-size: 2.5rem;
-      font-weight: 700;
+      font-size: 3.2rem;
+      font-weight: 800;
+      letter-spacing: -1.5px;
       color: var(--primary);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .stats-label {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      font-weight: 600;
+      color: #718096;
+    }
+
+    #resultsSection {
+      border: none;
+      border-radius: 16px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.04);
+      overflow: hidden;
+      background: white;
+    }
+
+    #resultsSection .card-header {
+      background: white !important;
+      border-bottom: 1px solid #edf2f7;
+      padding: 20px 24px;
+    }
+
+    #resultsTable th {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #a0aec0;
+      border-top: none;
+      padding: 16px 24px;
+      background: #f8fafc;
+      font-weight: 700;
+    }
+
+    #resultsTable td {
+      padding: 16px 24px;
+      vertical-align: middle;
+      border-bottom: 1px solid #edf2f7;
+      color: #4a5568;
+      font-size: 0.95rem;
+    }
+
+    #resultsTable tbody tr {
+      transition: background-color 0.2s;
+    }
+
+    #resultsTable tbody tr:hover {
+      background-color: #f8fafc;
     }
 
     .footer {
@@ -199,7 +278,9 @@
     }
 
     @media (max-width: 576px) {
-      .timeout-settings { flex-wrap: wrap; }
+      .timeout-settings {
+        flex-wrap: wrap;
+      }
     }
 
     /* Professional NITs Panel (Floating glassmorphism) */
@@ -347,35 +428,64 @@
         <!-- Timeout Settings -->
         <div class="timeout-settings">
           <span class="timeout-label"><i class="bi bi-sliders me-1"></i> Tiempos</span>
+          <span id="configSaveStatus" style="font-size:0.7rem;color:#38a169;font-weight:600;"></span>
 
-          <div class="timeout-group">
-            <span class="timeout-label">General Entre Nits</span>
+          <div class="timeout-group" style="display: none;">
+            <span class="timeout-label">General / Entre NITs</span>
             <div class="timeout-spinner-wrap">
-              <input type="number" id="inputTimeoutGeneral" value="4" min="1" max="120">
-              <div class="spin-btn" onclick="spinChange('inputTimeoutGeneral', 1)" title="Subir">
-                <span>&#9650;</span>
-              </div>
-              <div class="spin-btn" onclick="spinChange('inputTimeoutGeneral', -1)" title="Bajar">
-                <span>&#9660;</span>
-              </div>
+              <input type="number" id="inputTimeoutGeneral" value="30" min="1" max="120" onchange="guardarConfig()">
+              <div class="spin-btn" onclick="spinChange('inputTimeoutGeneral', 1)" title="Subir"><span>▲</span></div>
+              <div class="spin-btn" onclick="spinChange('inputTimeoutGeneral', -1)" title="Bajar"><span>▼</span></div>
             </div>
             <span class="timeout-unit">segundos</span>
           </div>
 
-          <div class="timeout-group">
+          <div class="timeout-group" style="display: none;">
             <span class="timeout-label">Cloudflare</span>
             <div class="timeout-spinner-wrap">
-              <input type="number" id="inputTimeoutCloudflare" value="20" min="1" max="300">
-              <div class="spin-btn" onclick="spinChange('inputTimeoutCloudflare', 1)" title="Subir">
-                <span>&#9650;</span>
-              </div>
-              <div class="spin-btn" onclick="spinChange('inputTimeoutCloudflare', -1)" title="Bajar">
-                <span>&#9660;</span>
+              <input type="number" id="inputTimeoutCloudflare" value="1" min="1" max="300" onchange="guardarConfig()">
+              <div class="spin-btn" onclick="spinChange('inputTimeoutCloudflare', 1)" title="Subir"><span>▲</span></div>
+              <div class="spin-btn" onclick="spinChange('inputTimeoutCloudflare', -1)" title="Bajar"><span>▼</span>
               </div>
             </div>
             <span class="timeout-unit">segundos</span>
           </div>
+
+          <div class="timeout-group" style="display: none;">
+            <span class="timeout-label">Fast Fail</span>
+            <div class="timeout-spinner-wrap">
+              <input type="number" id="inputTimeoutFastFail" value="500" min="100" max="10000" step="100"
+                onchange="guardarConfig()">
+              <div class="spin-btn" onclick="spinChange('inputTimeoutFastFail', 100)" title="Subir"><span>▲</span></div>
+              <div class="spin-btn" onclick="spinChange('inputTimeoutFastFail', -100)" title="Bajar"><span>▼</span>
+              </div>
+            </div>
+            <span class="timeout-unit">ms</span>
+          </div>
+
+          <div class="timeout-group" style="display: none;">
+            <span class="timeout-label">Pausa Reintentos</span>
+            <div class="timeout-spinner-wrap">
+              <input type="number" id="inputPausaReintentos" value="100" min="0" max="5000" step="50"
+                onchange="guardarConfig()">
+              <div class="spin-btn" onclick="spinChange('inputPausaReintentos', 50)" title="Subir"><span>▲</span></div>
+              <div class="spin-btn" onclick="spinChange('inputPausaReintentos', -50)" title="Bajar"><span>▼</span></div>
+            </div>
+            <span class="timeout-unit">ms</span>
+          </div>
+
+          <div class="timeout-group">
+            <span class="timeout-label">Max Reintentos</span>
+            <div class="timeout-spinner-wrap">
+              <input type="number" id="inputMaxReintentos" value="10" min="1" max="30" onchange="guardarConfig()">
+              <div class="spin-btn" onclick="spinChange('inputMaxReintentos', 1)" title="Subir"><span>▲</span></div>
+              <div class="spin-btn" onclick="spinChange('inputMaxReintentos', -1)" title="Bajar"><span>▼</span></div>
+            </div>
+            <span class="timeout-unit"># intentos</span>
+          </div>
+
         </div>
+
       </div>
     </div>
 
@@ -423,61 +533,71 @@
       </div>
     </div>
 
-    <div id="statsSection" class="row mb-4" style="display: none;">
-      <div class="col-md-4">
-        <div class="stats-card">
-          <div class="stats-number" id="totalStats">0</div>
-          <div class="stats-label">Total</div>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="stats-card">
-          <div class="stats-number text-success" id="encontradosStats">0</div>
-          <div class="stats-label">Encontrados</div>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="stats-card">
-          <div class="stats-number text-danger" id="errorStats">0</div>
-          <div class="stats-label">Errores</div>
-        </div>
-      </div>
+    <div id="dataToolbar" class="d-flex justify-content-between align-items-center mb-3" style="display: none;">
+      <h4 class="mb-0 text-primary fw-bold"><i class="bi bi-bar-chart-fill me-2"></i> Panel de Resultados</h4>
+      <button class="btn btn-outline-secondary shadow-sm" onclick="toggleDataView()" id="btnToggleData"
+        title="Ocultar/Mostrar Resultados">
+        <i class="bi bi-eye-slash"></i> Ocultar
+      </button>
     </div>
 
-    <div id="resultsSection" class="card" style="display: none;">
-      <div class="card-header bg-white d-flex justify-content-between align-items-center">
-        <h5 class="mb-0"><i class="bi bi-table"></i> Resultados</h5>
-        <div>
-          <button class="btn btn-sm btn-outline-success me-2" onclick="descargarExcel()">
-            <i class="bi bi-file-earmark-excel"></i> Excel
-          </button>
-          <button class="btn btn-sm btn-outline-warning me-2" onclick="descargarJson()">
-            <i class="bi bi-filetype-json"></i> JSON
-          </button>
-          <button class="btn btn-sm btn-outline-primary" onclick="recargarDatos()">
-            <i class="bi bi-arrow-clockwise"></i> Actualizar
-          </button>
+    <div id="dataWrapper" style="display: none;">
+      <div id="statsSection" class="row mb-4">
+        <div class="col-md-4">
+          <div class="stats-card">
+            <div class="stats-number" id="totalStats">0</div>
+            <div class="stats-label">Total</div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="stats-card">
+            <div class="stats-number text-success" id="encontradosStats">0</div>
+            <div class="stats-label">Encontrados</div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="stats-card">
+            <div class="stats-number text-danger" id="errorStats">0</div>
+            <div class="stats-label">Errores</div>
+          </div>
         </div>
       </div>
-      <div class="card-body p-0">
-        <div class="table-responsive">
-          <table class="table table-hover mb-0" id="resultsTable">
-            <thead>
-              <tr>
-                <th>NIT</th>
-                <th>Nombre / Razón Social</th>
-                <th>Estado</th>
-                <th>Fecha Inscripción</th>
-                <th>Fecha Precalificación</th>
-                <th>Tipo Precalificación</th>
-                <th>Vigencia</th>
-              </tr>
-            </thead>
-            <tbody id="resultsBody"></tbody>
-          </table>
+
+      <div id="resultsSection" class="card">
+        <div class="card-header bg-white d-flex justify-content-between align-items-center">
+          <h5 class="mb-0"><i class="bi bi-table"></i> Resultados</h5>
+          <div>
+            <button class="btn btn-sm btn-outline-success me-2" onclick="descargarExcel()">
+              <i class="bi bi-file-earmark-excel"></i> Excel
+            </button>
+            <button class="btn btn-sm btn-outline-warning me-2" onclick="descargarJson()">
+              <i class="bi bi-filetype-json"></i> JSON
+            </button>
+            <button class="btn btn-sm btn-outline-primary" onclick="recargarDatos()">
+              <i class="bi bi-arrow-clockwise"></i> Actualizar
+            </button>
+          </div>
+        </div>
+        <div class="card-body p-0">
+          <div class="table-responsive">
+            <table class="table table-hover mb-0" id="resultsTable">
+              <thead>
+                <tr>
+                  <th>NIT</th>
+                  <th>Nombre / Razón Social</th>
+                  <th>Estado</th>
+                  <th>Fecha Inscripción</th>
+                  <th>Fecha Precalificación</th>
+                  <th>Tipo Precalificación</th>
+                  <th>Vigencia</th>
+                </tr>
+              </thead>
+              <tbody id="resultsBody"></tbody>
+            </table>
+          </div>
         </div>
       </div>
-    </div>
+    </div> <!-- End dataWrapper -->
 
     <div id="noDataSection" class="card text-center py-5">
       <div class="card-body">
@@ -502,18 +622,43 @@
     let knownRunId = null;  // Detecta cuándo hay una nueva ejecución
     const POLL_INTERVAL_SEC = 2;
 
+    let configSaveTimer = null;
+
     function spinChange(id, delta) {
       const input = document.getElementById(id);
-      const val = parseInt(input.value, 10) || 0;
-      const min = parseInt(input.min, 10);
-      const max = parseInt(input.max, 10);
+      const step = parseFloat(input.step) || 1;
+      const val = parseFloat(input.value) || 0;
+      const min = parseFloat(input.min);
+      const max = parseFloat(input.max);
       input.value = Math.min(max, Math.max(min, val + delta));
+      guardarConfig();  // guardar al instante al usar las flechas
+    }
+
+    function guardarConfig() {
+      clearTimeout(configSaveTimer);
+      configSaveTimer = setTimeout(async () => {
+        const cfg = {
+          timeoutGeneral: parseFloat(document.getElementById('inputTimeoutGeneral').value) || 30,
+          timeoutCloudflare: parseFloat(document.getElementById('inputTimeoutCloudflare').value) || 1,
+          timeoutFastFailMs: parseInt(document.getElementById('inputTimeoutFastFail').value) || 500,
+          pausaEntreReintentos: parseInt(document.getElementById('inputPausaReintentos').value) || 100,
+          maxReintentos: parseInt(document.getElementById('inputMaxReintentos').value) || 10,
+        };
+        try {
+          await fetch('http://localhost:3000/api/save-config', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(cfg)
+          });
+          // Indicador visual breve
+          const lbl = document.getElementById('configSaveStatus');
+          if (lbl) { lbl.textContent = '✓ Guardado'; setTimeout(() => { lbl.textContent = ''; }, 1500); }
+        } catch (e) { console.warn('No se pudo guardar config:', e); }
+      }, 400);  // debounce 400ms para no disparar en cada tecla
     }
 
     async function ejecutarScraper() {
       document.getElementById('loadingSection').style.display = 'none';
-      document.getElementById('resultsSection').style.display = 'none';
-      document.getElementById('statsSection').style.display = 'none';
       document.getElementById('noDataSection').style.display = 'none';
       document.getElementById('consoleSection').style.display = 'block';
       document.getElementById('consoleOutput').textContent = 'Iniciando scraper...\n';
@@ -521,17 +666,20 @@
       document.getElementById('consoleStatus').className = 'badge bg-success';
 
       // Leer valores de los spinners
-      const timeoutGeneral = parseInt(document.getElementById('inputTimeoutGeneral').value, 10) || 4;
-      const timeoutCloudflare = parseInt(document.getElementById('inputTimeoutCloudflare').value, 10) || 20;
+      const timeoutGeneral = parseInt(document.getElementById('inputTimeoutGeneral').value, 10) || 30;
+      const timeoutCloudflare = parseFloat(document.getElementById('inputTimeoutCloudflare').value) || 1;
+      const timeoutFastFailMs = parseInt(document.getElementById('inputTimeoutFastFail').value, 10) || 500;
+      const pausaEntreReintentos = parseInt(document.getElementById('inputPausaReintentos').value, 10) || 100;
+      const maxReintentos = parseInt(document.getElementById('inputMaxReintentos').value, 10) || 10;
 
       // Limpiar el runId conocido para que el primer poll detecte el nuevo run
       knownRunId = null;
 
       try {
-        const response = await fetch('/api/run-scraper', {
+        const response = await fetch('http://localhost:3000/api/run-scraper', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ timeoutGeneral, timeoutCloudflare })
+          body: JSON.stringify({ timeoutGeneral, timeoutCloudflare, timeoutFastFailMs, pausaEntreReintentos, maxReintentos })
         });
         const data = await response.json();
 
@@ -541,7 +689,7 @@
 
           pollInterval = setInterval(async () => {
             try {
-              const res = await fetch('/api/running');
+              const res = await fetch('http://localhost:3000/api/running');
               const data = await res.json();
 
               // Si el servidor reporta un runId diferente al que conocemos,
@@ -602,8 +750,8 @@
       } catch (e) {
         console.error('Error cargando datos:', e);
         document.getElementById('noDataSection').style.display = 'block';
-        document.getElementById('resultsSection').style.display = 'none';
-        document.getElementById('statsSection').style.display = 'none';
+        document.getElementById('dataToolbar').style.display = 'none';
+        document.getElementById('dataWrapper').style.display = 'none';
       }
     }
 
@@ -651,8 +799,9 @@
       document.getElementById('errorStats').textContent = errores;
 
       document.getElementById('noDataSection').style.display = 'none';
-      document.getElementById('statsSection').style.display = 'flex';
-      document.getElementById('resultsSection').style.display = 'block';
+      document.getElementById('dataToolbar').style.display = 'flex';
+      document.getElementById('dataWrapper').style.display = 'block';
+      document.getElementById('btnToggleData').innerHTML = '<i class="bi bi-eye-slash"></i> Ocultar';
       document.getElementById('loadingSection').style.display = 'none';
       // La consola NO se oculta aquí para que el usuario pueda seguir viéndola
     }
@@ -672,6 +821,18 @@
         consoleSection.scrollIntoView({ behavior: 'smooth' });
       } else {
         consoleSection.style.display = 'none';
+      }
+    }
+
+    function toggleDataView() {
+      const wrapper = document.getElementById('dataWrapper');
+      const btn = document.getElementById('btnToggleData');
+      if (wrapper.style.display === 'none') {
+        wrapper.style.display = 'block';
+        btn.innerHTML = '<i class="bi bi-eye-slash"></i> Ocultar';
+      } else {
+        wrapper.style.display = 'none';
+        btn.innerHTML = '<i class="bi bi-eye"></i> Mostrar';
       }
     }
 
@@ -698,7 +859,7 @@
 
     async function actualizarNitsUI() {
       try {
-        const res = await fetch('/api/get-nits');
+        const res = await fetch('http://localhost:3000/api/get-nits');
         const data = await res.json();
         const nits = data.nits || [];
 
@@ -726,7 +887,7 @@
       const status = document.getElementById('saveStatus');
 
       try {
-        const response = await fetch('/api/upload-nits', {
+        const response = await fetch('http://localhost:3000/api/upload-nits', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ nits })
@@ -778,9 +939,25 @@
       reader.readAsBinaryString(file);
     });
 
+    // Carga los valores guardados en config.json y los pone en los inputs
+    async function cargarConfig() {
+      try {
+        const res = await fetch('http://localhost:3000/api/get-config');
+        const cfg = await res.json();
+        if (cfg.timeoutGeneral) document.getElementById('inputTimeoutGeneral').value = cfg.timeoutGeneral;
+        if (cfg.timeoutCloudflare) document.getElementById('inputTimeoutCloudflare').value = cfg.timeoutCloudflare;
+        if (cfg.timeoutFastFailMs) document.getElementById('inputTimeoutFastFail').value = cfg.timeoutFastFailMs;
+        if (cfg.pausaEntreReintentos) document.getElementById('inputPausaReintentos').value = cfg.pausaEntreReintentos;
+        if (cfg.maxReintentos) document.getElementById('inputMaxReintentos').value = cfg.maxReintentos;
+      } catch (e) {
+        console.warn('No se pudo cargar config:', e);
+      }
+    }
+
     window.onload = () => {
       cargarDatos();
       actualizarNitsUI();
+      cargarConfig();  // ← carga valores persistidos desde config.json
     };
   </script>
 </body>

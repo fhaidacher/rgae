@@ -26,15 +26,26 @@ const server = http.createServer(async (req, res) => {
     let body = '';
     req.on('data', chunk => { body += chunk.toString(); });
     req.on('end', async () => {
-      let timeoutGeneral = 4;
-      let timeoutCloudflare = 20;
+      let timeoutGeneral = 30;
+      let timeoutCloudflare = 1;
+      let timeoutFastFailMs = 500;
+      let pausaEntreReintentos = 100;
+      let maxReintentos = 10;
       try {
         const parsed = JSON.parse(body);
-        if (parsed.timeoutGeneral) timeoutGeneral = parseInt(parsed.timeoutGeneral, 10) || 4;
-        if (parsed.timeoutCloudflare) timeoutCloudflare = parseInt(parsed.timeoutCloudflare, 10) || 20;
+        if (parsed.timeoutGeneral)       timeoutGeneral       = parseFloat(parsed.timeoutGeneral)       || 30;
+        if (parsed.timeoutCloudflare)    timeoutCloudflare    = parseFloat(parsed.timeoutCloudflare)    || 1;
+        if (parsed.timeoutFastFailMs)    timeoutFastFailMs    = parseInt(parsed.timeoutFastFailMs)      || 500;
+        if (parsed.pausaEntreReintentos) pausaEntreReintentos = parseInt(parsed.pausaEntreReintentos)   || 100;
+        if (parsed.maxReintentos)        maxReintentos        = parseInt(parsed.maxReintentos)           || 10;
 
-        console.log("timeoutGeneral "+timeoutGeneral);
-        console.log("timeoutCloudflare "+timeoutCloudflare);
+        // Guardar en config.json para persistir entre ejecuciones
+        const cfgPath = path.join(__dirname, 'config.json');
+        fs.writeFileSync(cfgPath, JSON.stringify({
+          timeoutGeneral, timeoutCloudflare, timeoutFastFailMs, pausaEntreReintentos, maxReintentos
+        }, null, 2));
+
+        console.log(`⚙️  Config guardada → General:${timeoutGeneral}s | CF:${timeoutCloudflare}s | FastFail:${timeoutFastFailMs}ms | Pausa:${pausaEntreReintentos}ms | Reintentos:${maxReintentos}`);
       } catch (e) { }
 
       // Si ya hay uno corriendo, lo terminamos de forma SÍNCRONA
@@ -74,8 +85,11 @@ const server = http.createServer(async (req, res) => {
         stdio: ['ignore', out, out],
         env: {
           ...process.env,
-          TIMEOUT_GENERAL: String(timeoutGeneral),
-          TIMEOUT_WAIT_CLOUDFLARE: String(timeoutCloudflare)
+          TIMEOUT_GENERAL:           String(timeoutGeneral),
+          TIMEOUT_WAIT_CLOUDFLARE:   String(timeoutCloudflare),
+          TIMEOUT_FAST_FAIL_MS:      String(timeoutFastFailMs),
+          PAUSA_ENTRE_REINTENTOS_MS: String(pausaEntreReintentos),
+          MAX_REINTENTOS:            String(maxReintentos)
         }
       });
 
@@ -161,6 +175,34 @@ const server = http.createServer(async (req, res) => {
           res.writeHead(400, { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' });
           res.end(JSON.stringify({ status: 'error', message: 'Invalid data format' }));
         }
+      } catch (e) {
+        res.writeHead(500, { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' });
+        res.end(JSON.stringify({ status: 'error', message: e.message }));
+      }
+    });
+    return;
+  }
+
+  if (req.url === '/api/get-config' && req.method === 'GET') {
+    const cfgPath = path.join(__dirname, 'config.json');
+    let cfg = { timeoutGeneral: 30, timeoutCloudflare: 1, timeoutFastFailMs: 500, pausaEntreReintentos: 100, maxReintentos: 10 };
+    try {
+      if (fs.existsSync(cfgPath)) cfg = JSON.parse(fs.readFileSync(cfgPath, 'utf8'));
+    } catch (e) { }
+    res.writeHead(200, { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' });
+    res.end(JSON.stringify(cfg));
+    return;
+  }
+
+  if (req.url === '/api/save-config' && req.method === 'POST') {
+    let body = '';
+    req.on('data', chunk => { body += chunk.toString(); });
+    req.on('end', () => {
+      try {
+        const cfg = JSON.parse(body);
+        fs.writeFileSync(path.join(__dirname, 'config.json'), JSON.stringify(cfg, null, 2));
+        res.writeHead(200, { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' });
+        res.end(JSON.stringify({ status: 'ok' }));
       } catch (e) {
         res.writeHead(500, { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' });
         res.end(JSON.stringify({ status: 'error', message: e.message }));

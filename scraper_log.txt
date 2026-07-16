@@ -1,7 +1,6 @@
-__RUN_START__:1784172992142
+__RUN_START__:1784185229153
 📋 NITs cargados desde archivo: 29 registros
-TIMEOUT_GENERAL5
-TIMEOUT_WAIT_CLOUDFLARE15
+⚙️  Config → General:20s | Cloudflare:5s | FastFail:250ms | Pausa:250ms | MaxReintentos:10
 
 🚀 RGAE Scraper — 29 NITs
 
@@ -9,12 +8,54 @@ TIMEOUT_WAIT_CLOUDFLARE15
    Usando Chrome por defecto en Windows: C:\Program Files\Google\Chrome\Application\chrome.exe
    Modo Headless: false
    Navegando al primer NIT...
-TimeoutError: Navigation timeout of 5000 ms exceeded
-    at new Deferred (C:\Users\JM200506\Documents\GitHub\rgae\node_modules\puppeteer-core\lib\cjs\puppeteer\util\Deferred.js:54:34)
-    at Deferred.create (C:\Users\JM200506\Documents\GitHub\rgae\node_modules\puppeteer-core\lib\cjs\puppeteer\util\Deferred.js:16:16)
-    at new LifecycleWatcher (C:\Users\JM200506\Documents\GitHub\rgae\node_modules\puppeteer-core\lib\cjs\puppeteer\cdp\LifecycleWatcher.js:65:60)
-    at CdpFrame.goto (C:\Users\JM200506\Documents\GitHub\rgae\node_modules\puppeteer-core\lib\cjs\puppeteer\cdp\Frame.js:135:29)
-    at CdpFrame.<anonymous> (C:\Users\JM200506\Documents\GitHub\rgae\node_modules\puppeteer-core\lib\cjs\puppeteer\util\decorators.js:98:27)
-    at CdpPage.goto (C:\Users\JM200506\Documents\GitHub\rgae\node_modules\puppeteer-core\lib\cjs\puppeteer\api\Page.js:603:43)
-    at main (C:\Users\JM200506\Documents\GitHub\rgae\index.js:391:14)
-    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+
+⏳ Tienes hasta 20 segundos para resolver el captcha...
+⚠️  IMPORTANTE: NO CIERRES el navegador. Se cerrará solo al terminar.
+✅ Captcha resuelto detectado. Iniciando extracción inmediatamente...
+
+📡 Preparando navegador para Fast Fail...
+📡 Extrayendo datos...
+
+--- INICIANDO BUCLE DE EXTRACCIÓN ---
+[1/29] 48628727 →  ⚡ Reintento 1: (timeout/cloudflare) — abortando y reintentando...
+[1/29] 48628727 →  ✅ OK: ANGEL MAURICIO GARCÍA PAREDES (reintento 1)
+[2/29] 110058003 →  ✅ OK: DISTEXSA, SOCIEDAD ANÓNIMA
+[3/29] 29356326 →  ✅ OK: CELSO JESÚS PÉREZ ORTÍZ
+[4/29] 120521792 →  ✅ OK: CORPORACIÓN FERROAGRICOLA L&L, SOCIEDAD ANÓNIMA
+[5/29] 117193771 →  ✅ OK: JOSÉ ESTUARDO RODAS
+[6/29] 32824467 →  ⚡ Reintento 1: (timeout/cloudflare) — abortando y reintentando...
+[6/29] 32824467 →  ✅ OK: MELVYN DE JESÚS PÉREZ ARRIAGA (reintento 1)
+[7/29] 96428457 →  ✅ OK: EDWIN GIOVANNI VÁSQUEZ VELÁSQUEZ
+[8/29] 89938577 →  ⚡ Reintento 1: (timeout/cloudflare) — abortando y reintentando...
+[8/29] 89938577 →  ✅ OK: WILLIAM DAVID QUINÁ SIMÓN (reintento 1)
+[9/29] 11810815 →  ✅ OK: ERITA MARELÍ POLANCO MEDRANO
+[10/29] 120713128 →  ✅ OK: ANIMAL WORLD, SOCIEDAD ANÓNIMA
+[11/29] 1204076 →  ✅ OK: DROGUERIA REFASA , SOCIEDAD ANONIMA
+[12/29] 120909758 →  ⚡ Reintento 1: (timeout/cloudflare) — abortando y reintentando...
+[12/29] 120909758 →  ✅ OK: FASHION ORIENTAL, SOCIEDAD ANÓNIMA (reintento 1)
+[13/29] 120831147 →  ✅ OK: INVERSIONES JC, SOCIEDAD ANÓNIMA
+[14/29] 120456613 →  ✅ OK: INVERSIONES GRUPO FERSA, SOCIEDAD ANÓNIMA
+[15/29] 18165257 →  ✅ OK: UNIVERSIDAD PANAMERICANA
+[16/29] 120817721 →  ⚡ Reintento 1: (timeout/cloudflare) — abortando y reintentando...
+[16/29] 120817721 →  ⚡ Reintento 2: (timeout/cloudflare) — abortando y reintentando...
+[16/29] 120817721 →  ✅ OK: CORPORACIÓN OSWARD, SOCIEDAD ANÓNIMA (reintento 2)
+[17/29] 109310047 →  ✅ OK: ANTHONY JEREMY'S DE JESÚS ROMERO REYNA
+[18/29] 83314970 →  ✅ OK: JONAS ANDRES CLAVERIA CARRANZA
+[19/29] 105467219 →  ✅ OK: CARLOS AUGUSTO LUCAS PÉREZ
+[20/29] 120389819 →  ✅ OK: ENVIRONMENT, TECHNOLOGY, INNOVATION, CONSTRUCTION, ASSETS, SOCIEDAD ANÓNIMA
+[21/29] 120588382 →  ⚡ Reintento 1: (timeout/cloudflare) — abortando y reintentando...
+[21/29] 120588382 →  ✅ OK: CENTRO DE SERVICIO AUTOMOTRIZ PROLUB, SOCIEDAD ANÓNIMA (reintento 1)
+[22/29] 326630376 →  ✅ OK: CLETO ALEXANDER MATZAR CHIC
+[23/29] 44834616 →  ✅ OK: RENNER, SOCIEDAD ANONIMA
+[24/29] 120268647 →  ✅ OK: WALLTECH, SOCIEDAD ANÓNIMA
+[25/29] 120653362 →  ✅ OK: COMERCIALIZADORA GH, SOCIEDAD ANÓNIMA
+[26/29] 76135519 →  ✅ OK: ALEXANDER  SAMAYOA ARGUETA
+[27/29] 74523546 →  ✅ OK: JORGE LUIS SOMOCURCIO RAMOS
+[28/29] 103387226 →  ✅ OK: VILMA MANUELA XIRÚM MATEO
+[29/29] 113699654 →  ✅ OK: EDGAR JHONY SANTIZO DE LEÓN
+
+💾 JSON guardado con éxito.
+📊 Excel exportado con 4 hojas
+
+📋 RESUMEN: 29/29
+

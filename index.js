@@ -26,30 +26,59 @@ if (fs.existsSync(nitsPath)) {
 
 const BASE_URL = 'https://sistema.rgae.gob.gt/consulta-proveedores/proveedor';
 
-// Constantes de Tiempo (en segundos) — configurables desde la UI
-const TIMEOUT_GENERAL = parseFloat(process.env.TIMEOUT_GENERAL) || 4;
-const TIMEOUT_WAIT_CLOUDFLARE = parseFloat(process.env.TIMEOUT_WAIT_CLOUDFLARE) || 20;
+// ─── Configuración persistente ────────────────────────────────────────────────
+// Lee config.json si existe; los valores del archivo se usan como default.
+// Variables de entorno (enviadas por server.js al lanzar) tienen prioridad.
+const CONFIG_PATH = path.join(__dirname, 'config.json');
+let _cfg = {};
+try {
+  if (fs.existsSync(CONFIG_PATH)) {
+    _cfg = JSON.parse(fs.readFileSync(CONFIG_PATH, 'utf8'));
+  }
+} catch (e) {
+  console.warn('⚠️  No se pudo leer config.json, usando valores por defecto.');
+}
 
-// No alterar los de abajo solo cambiar los valores  TIMEOUT_GENERAL y TIMEOUT_WAIT_CLOUDFLARE
+// Prioridad: variable de entorno > config.json > valor hardcoded
+const TIMEOUT_GENERAL = parseFloat(process.env.TIMEOUT_GENERAL) || _cfg.timeoutGeneral || 30;
+const TIMEOUT_WAIT_CLOUDFLARE = parseFloat(process.env.TIMEOUT_WAIT_CLOUDFLARE) || _cfg.timeoutCloudflare || 1;
+const TIMEOUT_FAST_FAIL_MS = parseInt(process.env.TIMEOUT_FAST_FAIL_MS) || _cfg.timeoutFastFailMs || 500;
+const PAUSA_ENTRE_REINTENTOS_MS = parseInt(process.env.PAUSA_ENTRE_REINTENTOS_MS) || _cfg.pausaEntreReintentos || 100;
+const MAX_REINTENTOS_CFG = parseInt(process.env.MAX_REINTENTOS) || _cfg.maxReintentos || 10;
 
+console.log(`⚙️  Config → General:${TIMEOUT_GENERAL}s | Cloudflare:${TIMEOUT_WAIT_CLOUDFLARE}s | FastFail:${TIMEOUT_FAST_FAIL_MS}ms | Pausa:${PAUSA_ENTRE_REINTENTOS_MS}ms | MaxReintentos:${MAX_REINTENTOS_CFG}`);
+
+// Derivados (no tocar)
 const TIMEOUT_PAGINA_CARGA = TIMEOUT_GENERAL;
-const TIMEOUT_ESPERA_POST_CARGA = 0.3;
+const TIMEOUT_ESPERA_POST_CARGA = 0.5;
 const TIMEOUT_RESOLVER_CAPTCHA = TIMEOUT_GENERAL;
-const TIMEOUT_ENTRE_NITS = 0.3;
+
+// Limitar a ~10 registros por minuto (1 registro cada 6 segundos) para evitar bloqueos
+const TIMEOUT_ENTRE_NITS = 2.5;
+const TIMEOUT_ENTRE_NITS_RAPIDO = parseFloat(process.env.TIMEOUT_ENTRE_NITS_RAPIDO) || _cfg.timeoutEntreNitsRapido || 2.5;
 const TIMEOUT_NAVEGACION_INICIAL = TIMEOUT_GENERAL;
-  console.log("TIMEOUT_GENERAL" + TIMEOUT_GENERAL);
-  console.log("TIMEOUT_WAIT_CLOUDFLARE" + TIMEOUT_WAIT_CLOUDFLARE)
+
+
+/**
+ * Aborta la navegación actual cargando about:blank y espera brevemente.
+ * Evita que Cloudflare deje la página congelada bloqueando el siguiente intento.
+ */
+async function abortarNavegacion(page) {
+  try {
+    await page.goto('about:blank', { waitUntil: 'domcontentloaded', timeout: 3000 });
+  } catch (_) { /* ignorar errores al abortar */ }
+}
+
 async function extraerDatos(page, nit, index, total, skipNavigation = false) {
-  const MAX_RETRIES = 5;
+  const MAX_RETRIES = MAX_REINTENTOS_CFG;
   let attempt = 0;
   let datos = null;
   const urlPublica = `${BASE_URL}/${nit}?source=guatecompras`;
   const prefix = `[${index}/${total}] ${nit} → `;
 
-
-  // Timeouts dinámicos
-  let timeoutNavegacion = TIMEOUT_PAGINA_CARGA;  // segundos
-  let timeoutSelector = TIMEOUT_WAIT_CLOUDFLARE;                       // segundos (usado en waitForSelector)
+  // Timeout fijo corto: detecta rápido si Cloudflare congela y reintenta
+  const timeoutNavegacionMs = TIMEOUT_FAST_FAIL_MS;           // ms — directo, sin multiplicar
+  const timeoutSelectorMs = TIMEOUT_WAIT_CLOUDFLARE * 1000; // ms — espera el challenge
 
   while (attempt <= MAX_RETRIES) {
     try {
@@ -57,15 +86,49 @@ async function extraerDatos(page, nit, index, total, skipNavigation = false) {
         throw new Error('La página del navegador se cerró inesperadamente.');
       }
 
-      if (!skipNavigation || attempt > 0) {
-        await page.goto(urlPublica, { waitUntil: 'networkidle2', timeout: timeoutNavegacion * 1000 });
+      await page.goto(urlPublica, { waitUntil: 'domcontentloaded', timeout: timeoutNavegacionMs });
+
+      // ─── Detección rápida de "Verificando acceso" atascado ───────────────
+      const POLL_INTERVAL_MS = 300;
+      const maxPolls = Math.ceil(timeoutSelectorMs / POLL_INTERVAL_MS);
+      let cfExito = false;
+
+      for (let p = 0; p < maxPolls; p++) {
+        const estado = await page.evaluate(() => {
+          const hayInput = !!document.querySelector('input[readonly]');
+          const texto = document.body ? document.body.innerText : '';
+          const verificando = texto.includes('Verificando acceso') || texto.includes('Verifying you are human');
+          return { hayInput, verificando };
+        });
+
+        if (estado.hayInput) {
+          cfExito = true;
+          break;
+        }
+
+        if (estado.verificando && p > maxPolls / 2) {
+          throw new Error('Cloudflare atascado en "Verificando acceso" (checkbox no marcado)');
+        }
+
+        await new Promise(r => setTimeout(r, POLL_INTERVAL_MS));
       }
 
-      // Esperar a que la página pase el reto de Cloudflare
-      await page.waitForSelector('input[readonly]', { timeout: timeoutSelector * 1000 });
+      if (!cfExito) {
+        throw new Error('Timeout esperando input[readonly] (Cloudflare no resuelto)');
+      }
 
       // Esperar un momento de seguridad adicional para que se rellene el valor de los inputs
       await new Promise(r => setTimeout(r, TIMEOUT_ESPERA_POST_CARGA * 1000));
+
+      // Verificar si hay un mensaje de carga interno del sistema
+      const estaCargandoInfo = await page.evaluate(() => {
+        return document.body && document.body.innerText.includes('Cargando información del proveedor');
+      });
+
+      if (estaCargandoInfo) {
+        console.log(`${prefix} ⏳ El sistema indica 'Cargando información del proveedor', esperando 8 segundos extra...`);
+        await new Promise(r => setTimeout(r, 8000));
+      }
 
 
       datos = await page.evaluate(() => {
@@ -174,8 +237,8 @@ async function extraerDatos(page, nit, index, total, skipNavigation = false) {
     } catch (err) {
       // Convertir errores técnicos de Puppeteer en mensajes amigables
       const esMensajeAmigable = (msg) => {
-        if (msg.includes('Waiting for selector') || msg.includes('waiting failed') || msg.includes('timeout') || msg.includes('TimeoutError')) {
-          return '(timeout)';
+        if (msg.includes('Waiting for selector') || msg.includes('waiting failed') || msg.includes('timeout') || msg.includes('TimeoutError') || msg.includes('Cloudflare atascado') || msg.includes('Cloudflare no resuelto')) {
+          return '(timeout/cloudflare)';
         }
         if (msg.includes('net::ERR_') || msg.includes('Navigation failed')) {
           return 'Error de conexión al cargar la página';
@@ -187,55 +250,34 @@ async function extraerDatos(page, nit, index, total, skipNavigation = false) {
       };
 
       const mensajeAmigable = esMensajeAmigable(err.message || '');
-      const esTimeout = mensajeAmigable === '(timeout)';
+      const esTimeout = mensajeAmigable === '(timeout/cloudflare)';
 
-      let logMensaje = `${prefix} ❌ Error en intento ${attempt + 1}: ${mensajeAmigable}`;
+      console.log(`${prefix} ⚡ Reintento ${attempt + 1}: ${mensajeAmigable} — abortando y reintentando...`);
 
-      // Escalado progresivo de timeouts ante timeout
-      if (esTimeout && attempt < MAX_RETRIES) {
-        if (attempt === 0) {
-          // Para el segundo intento (intento 2), aumentamos 50%
-          timeoutNavegacion = Math.round(TIMEOUT_PAGINA_CARGA * 2);
-          timeoutSelector = Math.round(25 * 3);
-          logMensaje += ` (aumentando espera a ${timeoutNavegacion}s para reintento)`;
-        } else if (attempt === 1) {
-          // Para el tercer intento (intento 3), aumentamos 100% (el doble)
-          timeoutNavegacion = TIMEOUT_PAGINA_CARGA * 2.5;
-          timeoutSelector = 25 * 3.5;
-          logMensaje += ` (aumentando espera a ${timeoutNavegacion}s para reintento)`;
+      // Verificar si hay un Error 1015 de Cloudflare antes de abortar navegación
+      try {
+        const pageText = await page.evaluate(() => document.body ? document.body.innerText : '');
+        if (pageText.includes('Error 1015') || pageText.toLowerCase().includes('rate limit')) {
+          console.log(`${prefix} 🚨 BLOQUEO DETECTADO: Error 1015 (Rate Limit). Abortando el scraper completo.`);
+          return { nit, url: urlPublica, status: 'RATE_LIMIT', data: null, error: 'Cloudflare Error 1015: Rate Limit' };
         }
-        else if (attempt === 2) {
-          // Para el tercer intento (intento 3), aumentamos 100% (el doble)
-          timeoutNavegacion = TIMEOUT_PAGINA_CARGA * 3;
-          timeoutSelector = 25 * 4;
-          logMensaje += ` (aumentando espera a ${timeoutNavegacion}s para reintento)`;
-        }
-        else if (attempt === 3) {
-          // Para el tercer intento (intento 3), aumentamos 100% (el doble)
-          timeoutNavegacion = TIMEOUT_PAGINA_CARGA * 3.5;
-          timeoutSelector = 25 * 4.5;
-          logMensaje += ` (aumentando espera a ${timeoutNavegacion}s para reintento)`;
-        }
-         else if (attempt === 4) {
-          // Para el tercer intento (intento 3), aumentamos 100% (el doble)
-          timeoutNavegacion = TIMEOUT_PAGINA_CARGA * 4;
-          timeoutSelector = 25 * 5;
-          logMensaje += ` (aumentando espera a ${timeoutNavegacion}s para reintento)`;
-        }
+      } catch (e) { }
+
+      // Si Cloudflare congeló la página, abortamos la navegación actual
+      // antes de reintentar para no quedar bloqueados.
+      if (esTimeout) {
+        await abortarNavegacion(page);
       }
-
-
-      console.log(logMensaje);
-
 
       attempt++;
       if (attempt > MAX_RETRIES) {
+        console.log(`${prefix} 🚫 Máximo de reintentos alcanzado.`);
         return { nit, url: urlPublica, status: 'ERROR', data: null, error: mensajeAmigable };
       }
-      await new Promise(r => setTimeout(r, 2000));
+
+      // Pausa corta antes del siguiente intento
+      await new Promise(r => setTimeout(r, PAUSA_ENTRE_REINTENTOS_MS));
     }
-
-
   }
 }
 
@@ -388,15 +430,87 @@ async function main() {
   await page.setViewport({ width: 1920, height: 1080 });
 
   console.log('   Navegando al primer NIT...');
-  await page.goto(`${BASE_URL}/${NITS[0]}?source=guatecompras`, { waitUntil: 'networkidle2', timeout: TIMEOUT_NAVEGACION_INICIAL * 1000 });
+  await page.goto(`${BASE_URL}/${NITS[0]}?source=guatecompras`, { waitUntil: 'domcontentloaded', timeout: TIMEOUT_NAVEGACION_INICIAL * 1000 });
 
-  console.log(`\n⏳ Espera ${TIMEOUT_RESOLVER_CAPTCHA} segundos para resolver el captcha...`);
+  console.log(`\n⏳ Tienes hasta ${TIMEOUT_RESOLVER_CAPTCHA} segundos para resolver el captcha...`);
   console.log('⚠️  IMPORTANTE: NO CIERRES el navegador. Se cerrará solo al terminar.');
 
-  await new Promise(r => setTimeout(r, TIMEOUT_RESOLVER_CAPTCHA * 1000));
+  // Auto-clicker para marcar el checkbox de Cloudflare automáticamente (versión humana)
+  const autoClickCaptcha = setInterval(async () => {
+    try {
+      const iframes = await page.$$('iframe');
+      for (const iframe of iframes) {
+        const box = await iframe.boundingBox();
+        // El widget de Cloudflare Turnstile suele medir aprox 300x65 px
+        if (box && box.width > 200 && box.height > 40) {
+          // El checkbox suele estar a unos 40px del borde izquierdo, centrado verticalmente
+          const targetX = box.x + 40;
+          const targetY = box.y + (box.height / 2);
+
+          // Simular movimiento humano hacia el checkbox
+          await page.mouse.move(targetX, targetY, { steps: 15 });
+
+          // Pausa como lo haría un humano antes de dar click
+          await new Promise(r => setTimeout(r, 150));
+
+          // Click físico real
+          await page.mouse.down();
+          await new Promise(r => setTimeout(r, 80));
+          await page.mouse.up();
+
+          break; // Solo hacer clic en el primero que cumpla
+        }
+      }
+    } catch (e) { }
+  }, 2000);
+
+  const FAST_FAIL_POLL_MS = 500;
+  const maxPollsInicial = Math.ceil((TIMEOUT_RESOLVER_CAPTCHA * 1000) / FAST_FAIL_POLL_MS);
+  let captchaResuelto = false;
+
+  for (let intento = 0; intento < maxPollsInicial; intento++) {
+    const estado = await page.evaluate(() => {
+      const hayInput = !!document.querySelector('input[readonly]');
+      const texto = document.body ? document.body.innerText : '';
+      const verificando = texto.includes('Verificando acceso') || texto.includes('Verifying you are human');
+      return { hayInput, verificando };
+    });
+
+    if (estado.hayInput) {
+      captchaResuelto = true;
+      console.log('✅ Captcha resuelto detectado. Iniciando extracción inmediatamente...\n');
+      break;
+    }
+
+    // Si sigue atascado en "Verificando acceso" tras 5 segundos, recargamos la página
+    // para forzar un nuevo intento del challenge en vez de esperar pasivamente.
+    if (estado.verificando && intento > 0 && intento % 10 === 0) {
+      console.log('⚡ Cloudflare atascado en "Verificando acceso" — recargando página para reintentar...');
+      try {
+        await page.goto(`${BASE_URL}/${NITS[0]}?source=guatecompras`, { waitUntil: 'domcontentloaded', timeout: TIMEOUT_FAST_FAIL_MS });
+      } catch (_) { /* ignorar timeout de recarga */ }
+    }
+
+    await new Promise(r => setTimeout(r, FAST_FAIL_POLL_MS));
+  }
+
+  if (!captchaResuelto) {
+    console.log('⚠️ Tiempo de captcha agotado. Iniciando bucle de todos modos...\n');
+  }
+
+  console.log('📡 Preparando navegador para Fast Fail...');
+  await page.goto('about:blank');
 
   console.log('📡 Extrayendo datos...\n');
   console.log('--- INICIANDO BUCLE DE EXTRACCIÓN ---');
+
+  const now = new Date();
+  const dateStr = now.getFullYear() + '-' +
+    String(now.getMonth() + 1).padStart(2, '0') + '-' +
+    String(now.getDate()).padStart(2, '0') + '.' +
+    String(now.getHours()).padStart(2, '0') + '.' +
+    String(now.getMinutes()).padStart(2, '0')
+  const backupFileName = `proveedores_rgae_${dateStr}.json`;
 
   const resultados = [];
 
@@ -404,17 +518,41 @@ async function main() {
     const isFirst = (i === 0);
     const resultado = await extraerDatos(page, NITS[i], i + 1, NITS.length, isFirst);
     resultados.push(resultado);
-    await new Promise(r => setTimeout(r, TIMEOUT_ENTRE_NITS * 1000));
+
+    // Guardar instantáneamente el NIT si fue exitoso en el archivo con fecha
+    if (resultado.status === 'ENCONTRADO') {
+      const exitosos = resultados.filter(r => r.status === 'ENCONTRADO');
+      fs.writeFileSync('./backups/' + backupFileName, JSON.stringify(exitosos, null, 2));
+    }
+
+    if (resultado.status === 'RATE_LIMIT') {
+      console.log('\n🛑 Scraper abortado debido a un bloqueo de Cloudflare (Error 1015 / Rate Limit).');
+      break;
+    }
+
+    // Pausa corta si el NIT se extrajo sin reintentos (todo fluyó bien),
+    // pausa completa si hubo que reintentar (protege contra rate-limit de Cloudflare).
+    const pausaMs = resultado.status === 'ENCONTRADO'
+      ? TIMEOUT_ENTRE_NITS_RAPIDO * 1000
+      : TIMEOUT_ENTRE_NITS * 1000;
+
+    await new Promise(r => setTimeout(r, pausaMs));
+
   }
 
   await browser.close();
 
-  fs.writeFileSync('proveedores_rgae.json', JSON.stringify(resultados, null, 2));
-  console.log('\n💾 JSON guardado');
-  exportarExcel(resultados);
+  const encontradosFinales = resultados.filter(r => r.status === 'ENCONTRADO').length;
 
-  const encontrados = resultados.filter(r => r.status === 'ENCONTRADO').length;
-  console.log(`\n📋 RESUMEN: ${encontrados}/${resultados.length}\n`);
+  if (encontradosFinales > 1) {
+    fs.writeFileSync('proveedores_rgae.json', JSON.stringify(resultados, null, 2));
+    console.log('\n💾 JSON guardado con éxito.');
+    exportarExcel(resultados);
+  } else {
+    console.log('\n⚠️ Scraper finalizado con 1 o 0 resultados. No se sobrescribirá el archivo JSON ni el Excel principal para proteger tus datos.');
+  }
+
+  console.log(`\n📋 RESUMEN: ${encontradosFinales}/${resultados.length}\n`);
 }
 
 main().catch(console.error);
