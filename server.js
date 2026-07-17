@@ -142,8 +142,24 @@ const server = http.createServer(async (req, res) => {
       rawLog = fs.readFileSync(logPath, 'utf8');
     }
 
-    // Quitar la línea de marcador del contenido enviado al frontend
-    const logContent = rawLog.replace(/^__RUN_START__:\d+\n/, '');
+    // Parsear el inicio del bucle si ya existe en el log
+    const loopStartMatch = rawLog.match(/__LOOP_START__:(\d+)/);
+    const loopStart = loopStartMatch ? parseInt(loopStartMatch[1], 10) : null;
+
+    // Parsear la última fase activa del scraper
+    const faseMatches = [...rawLog.matchAll(/__FASE:(\w+)__:(\d+)/g)];
+    let currentFase = null;
+    let faseStart = null;
+    if (faseMatches.length > 0) {
+      const last = faseMatches[faseMatches.length - 1];
+      currentFase = last[1];
+      faseStart = parseInt(last[2], 10);
+    }
+
+    // Quitar las líneas de marcadores técnicos del contenido enviado al frontend
+    let logContent = rawLog.replace(/^__RUN_START__:\d+\n/, '');
+    logContent = logContent.replace(/__LOOP_START__:\d+\n/g, '');
+    logContent = logContent.replace(/__FASE:\w+__:\d+\n/g, '');
 
     const isRunning = currentScraper !== null;
     const jsonExists = fs.existsSync(path.join(__dirname, 'proveedores_rgae.json'));
@@ -156,7 +172,10 @@ const server = http.createServer(async (req, res) => {
       running: isRunning,
       log: logContent,
       completed: jsonExists && !isRunning,
-      runId: currentRunId
+      runId: currentRunId,
+      loopStart: loopStart,
+      currentFase: currentFase,
+      faseStart: faseStart
     }));
     return;
   }

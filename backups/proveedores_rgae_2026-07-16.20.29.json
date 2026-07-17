@@ -527,44 +527,5 @@
       "Especialidades": [],
       "Solicitudes": []
     }
-  },
-  {
-    "nit": "83314970",
-    "url": "https://sistema.rgae.gob.gt/consulta-proveedores/proveedor/83314970?source=guatecompras",
-    "status": "ENCONTRADO",
-    "data": {
-      "NIT": "83314970",
-      "Nombre o razón social": "JONAS ANDRES CLAVERIA CARRANZA",
-      "Representantes": [],
-      "Comercios": [],
-      "Especialidades": [],
-      "Solicitudes": []
-    }
-  },
-  {
-    "nit": "105467219",
-    "url": "https://sistema.rgae.gob.gt/consulta-proveedores/proveedor/105467219?source=guatecompras",
-    "status": "ENCONTRADO",
-    "data": {
-      "NIT": "105467219",
-      "Nombre o razón social": "CARLOS AUGUSTO LUCAS PÉREZ",
-      "Representantes": [],
-      "Comercios": [],
-      "Especialidades": [],
-      "Solicitudes": []
-    }
-  },
-  {
-    "nit": "120389819",
-    "url": "https://sistema.rgae.gob.gt/consulta-proveedores/proveedor/120389819?source=guatecompras",
-    "status": "ENCONTRADO",
-    "data": {
-      "NIT": "120389819",
-      "Nombre o razón social": "ENVIRONMENT, TECHNOLOGY, INNOVATION, CONSTRUCTION, ASSETS, SOCIEDAD ANÓNIMA",
-      "Representantes": [],
-      "Comercios": [],
-      "Especialidades": [],
-      "Solicitudes": []
-    }
   }
 ]

@@ -54,8 +54,8 @@ const TIMEOUT_ESPERA_POST_CARGA = 0.5;
 const TIMEOUT_RESOLVER_CAPTCHA = TIMEOUT_GENERAL;
 
 // Limitar a ~10 registros por minuto (1 registro cada 6 segundos) para evitar bloqueos
-const TIMEOUT_ENTRE_NITS = 2.5;
-const TIMEOUT_ENTRE_NITS_RAPIDO = parseFloat(process.env.TIMEOUT_ENTRE_NITS_RAPIDO) || _cfg.timeoutEntreNitsRapido || 2.5;
+const TIMEOUT_ENTRE_NITS = parseFloat(process.env.TIMEOUT_GENERAL) || _cfg.timeoutGeneral || 5;
+const TIMEOUT_ENTRE_NITS_RAPIDO = parseFloat(process.env.TIMEOUT_ENTRE_NITS_RAPIDO) || _cfg.timeoutEntreNitsRapido || 3;
 const TIMEOUT_NAVEGACION_INICIAL = TIMEOUT_GENERAL;
 
 
@@ -86,13 +86,16 @@ async function extraerDatos(page, nit, index, total, skipNavigation = false) {
         throw new Error('La página del navegador se cerró inesperadamente.');
       }
 
+      const tStartGoto = Date.now();
       await page.goto(urlPublica, { waitUntil: 'domcontentloaded', timeout: timeoutNavegacionMs });
+      const navMs = Date.now() - tStartGoto;
 
-      // ─── Detección rápida de "Verificando acceso" atascado ───────────────
+
       const POLL_INTERVAL_MS = 300;
       const maxPolls = Math.ceil(timeoutSelectorMs / POLL_INTERVAL_MS);
       let cfExito = false;
 
+      const tStartCf = Date.now();
       for (let p = 0; p < maxPolls; p++) {
         const estado = await page.evaluate(() => {
           const hayInput = !!document.querySelector('input[readonly]');
@@ -112,25 +115,30 @@ async function extraerDatos(page, nit, index, total, skipNavigation = false) {
 
         await new Promise(r => setTimeout(r, POLL_INTERVAL_MS));
       }
+      const cfMs = Date.now() - tStartCf;
 
       if (!cfExito) {
         throw new Error('Timeout esperando input[readonly] (Cloudflare no resuelto)');
       }
 
-      // Esperar un momento de seguridad adicional para que se rellene el valor de los inputs
+      // Esperar un momento de seguridad adicional
+      const tStartEspera = Date.now();
       await new Promise(r => setTimeout(r, TIMEOUT_ESPERA_POST_CARGA * 1000));
+      const esperaMs = Date.now() - tStartEspera;
 
       // Verificar si hay un mensaje de carga interno del sistema
       const estaCargandoInfo = await page.evaluate(() => {
         return document.body && document.body.innerText.includes('Cargando información del proveedor');
       });
 
+      const tStartLoad = Date.now();
       if (estaCargandoInfo) {
         console.log(`${prefix} ⏳ El sistema indica 'Cargando información del proveedor', esperando 8 segundos extra...`);
         await new Promise(r => setTimeout(r, 8000));
       }
+      const loadMs = Date.now() - tStartLoad;
 
-
+      const tStartExtract = Date.now();
       datos = await page.evaluate(() => {
         const resultado = {};
         const inputs = document.querySelectorAll('input[readonly]');
@@ -224,14 +232,18 @@ async function extraerDatos(page, nit, index, total, skipNavigation = false) {
         return resultado;
       });
 
+      const extractMs = Date.now() - tStartExtract;
+
       const nombre = datos['Nombre o razón social'];
+      const totalMs = navMs + cfMs + esperaMs + loadMs + extractMs;
+      const timing = `Red: ${(navMs / 1000).toFixed(2)}s | CF: ${(cfMs / 1000).toFixed(2)}s | Espera: ${(esperaMs / 1000).toFixed(2)}s | Carga: ${(loadMs / 1000).toFixed(2)}s | Extrae: ${(extractMs / 1000).toFixed(2)}s | TOTAL: ${(totalMs / 1000).toFixed(2)}s`;
       if (nombre && nombre !== 'Sin nombre') {
-        console.log(`${prefix} ✅ OK: ${nombre}${attempt > 0 ? ` (reintento ${attempt})` : ''}`);
+        console.log(`${prefix} ✅ OK: ${nombre.substring(0, 30)}${attempt > 0 ? ` (reintento ${attempt})` : ''} | ${timing}`);
         return { nit, url: urlPublica, status: 'ENCONTRADO', data: datos };
       }
 
       // Si la página cargó pero el nombre está vacío: NIT no registrado en RGAE
-      console.log(`${prefix} ❌ NIT no registrado o sin datos en RGAE.`);
+      console.log(`${prefix} ❌ NIT no registrado o sin datos en RGAE. | ${timing}`);
       return { nit, url: urlPublica, status: 'ENCONTRADO', data: datos };
 
     } catch (err) {
@@ -251,6 +263,12 @@ async function extraerDatos(page, nit, index, total, skipNavigation = false) {
 
       const mensajeAmigable = esMensajeAmigable(err.message || '');
       const esTimeout = mensajeAmigable === '(timeout/cloudflare)';
+
+      // Chequeo infalible: si el navegador o la página se cerraron, abortar de inmediato.
+      if (mensajeAmigable === 'El navegador se cerró inesperadamente' || page.isClosed()) {
+        console.log(`${prefix} 🛑 Navegador cerrado por el usuario. Deteniendo scraper.`);
+        return { nit, url: urlPublica, status: 'BROWSER_CLOSED', data: null, error: 'Browser closed' };
+      }
 
       console.log(`${prefix} ⚡ Reintento ${attempt + 1}: ${mensajeAmigable} — abortando y reintentando...`);
 
@@ -503,7 +521,6 @@ async function main() {
 
   console.log('📡 Extrayendo datos...\n');
   console.log('--- INICIANDO BUCLE DE EXTRACCIÓN ---');
-
   const now = new Date();
   const dateStr = now.getFullYear() + '-' +
     String(now.getMonth() + 1).padStart(2, '0') + '-' +
@@ -519,6 +536,9 @@ async function main() {
     const resultado = await extraerDatos(page, NITS[i], i + 1, NITS.length, isFirst);
     resultados.push(resultado);
 
+    // Guardar en proveedores_rgae.json en tiempo real con cada registro
+    fs.writeFileSync('proveedores_rgae.json', JSON.stringify(resultados, null, 2));
+
     // Guardar instantáneamente el NIT si fue exitoso en el archivo con fecha
     if (resultado.status === 'ENCONTRADO') {
       const exitosos = resultados.filter(r => r.status === 'ENCONTRADO');
@@ -527,6 +547,11 @@ async function main() {
 
     if (resultado.status === 'RATE_LIMIT') {
       console.log('\n🛑 Scraper abortado debido a un bloqueo de Cloudflare (Error 1015 / Rate Limit).');
+      break;
+    }
+
+    if (resultado.status === 'BROWSER_CLOSED') {
+      console.log('\n🛑 Scraper abortado porque se cerró el navegador.');
       break;
     }
 

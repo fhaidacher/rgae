@@ -1,0 +1,181 @@
+[
+  {
+    "nit": "48628727",
+    "url": "https://sistema.rgae.gob.gt/consulta-proveedores/proveedor/48628727?source=guatecompras",
+    "status": "ENCONTRADO",
+    "data": {
+      "NIT": "48628727",
+      "Nombre o razón social": "ANGEL MAURICIO GARCÍA PAREDES",
+      "Representantes": [],
+      "Comercios": [],
+      "Especialidades": [],
+      "Solicitudes": []
+    }
+  },
+  {
+    "nit": "110058003",
+    "url": "https://sistema.rgae.gob.gt/consulta-proveedores/proveedor/110058003?source=guatecompras",
+    "status": "ENCONTRADO",
+    "data": {
+      "NIT": "110058003",
+      "Nombre o razón social": "DISTEXSA, SOCIEDAD ANÓNIMA",
+      "Representantes": [],
+      "Comercios": [],
+      "Especialidades": [],
+      "Solicitudes": []
+    }
+  },
+  {
+    "nit": "29356326",
+    "url": "https://sistema.rgae.gob.gt/consulta-proveedores/proveedor/29356326?source=guatecompras",
+    "status": "ENCONTRADO",
+    "data": {
+      "NIT": "29356326",
+      "Nombre o razón social": "CELSO JESÚS PÉREZ ORTÍZ",
+      "Representantes": [],
+      "Comercios": [],
+      "Especialidades": [],
+      "Solicitudes": []
+    }
+  },
+  {
+    "nit": "120521792",
+    "url": "https://sistema.rgae.gob.gt/consulta-proveedores/proveedor/120521792?source=guatecompras",
+    "status": "ENCONTRADO",
+    "data": {
+      "NIT": "120521792",
+      "Nombre o razón social": "CORPORACIÓN FERROAGRICOLA L&L, SOCIEDAD ANÓNIMA",
+      "Representantes": [],
+      "Comercios": [],
+      "Especialidades": [],
+      "Solicitudes": []
+    }
+  },
+  {
+    "nit": "117193771",
+    "url": "https://sistema.rgae.gob.gt/consulta-proveedores/proveedor/117193771?source=guatecompras",
+    "status": "ENCONTRADO",
+    "data": {
+      "NIT": "117193771",
+      "Nombre o razón social": "JOSÉ ESTUARDO RODAS",
+      "Representantes": [],
+      "Comercios": [],
+      "Especialidades": [],
+      "Solicitudes": []
+    }
+  },
+  {
+    "nit": "32824467",
+    "url": "https://sistema.rgae.gob.gt/consulta-proveedores/proveedor/32824467?source=guatecompras",
+    "status": "ENCONTRADO",
+    "data": {
+      "NIT": "32824467",
+      "Nombre o razón social": "MELVYN DE JESÚS PÉREZ ARRIAGA",
+      "Representantes": [],
+      "Comercios": [],
+      "Especialidades": [],
+      "Solicitudes": []
+    }
+  },
+  {
+    "nit": "96428457",
+    "url": "https://sistema.rgae.gob.gt/consulta-proveedores/proveedor/96428457?source=guatecompras",
+    "status": "ENCONTRADO",
+    "data": {
+      "NIT": "96428457",
+      "Nombre o razón social": "EDWIN GIOVANNI VÁSQUEZ VELÁSQUEZ",
+      "Estado Actual": "No Actualizado",
+      "Fecha de Inscripción": "23/12/2025",
+      "Representantes": [],
+      "Comercios": [
+        {
+          "nombre": "PANADERÍA Y PASTELERÍA DON WINO",
+          "direccion": "SECTOR 1 LOTE 111 APTO. A ZONA 0 COLONIA SAN JULIÁN NUEVA CHINAUTLA 13 AVENIDA A CHINAUTLA,GUATEMALA"
+        }
+      ],
+      "Especialidades": [],
+      "Solicitudes": [
+        {
+          "numero": "INSC2025183407",
+          "tipo": "Inscripción de Comerciante Individual",
+          "estado": "Finalizada",
+          "fechaAprobacion": "23/12/2025",
+          "constancia": "",
+          "resolucion": ""
+        }
+      ]
+    }
+  },
+  {
+    "nit": "89938577",
+    "url": "https://sistema.rgae.gob.gt/consulta-proveedores/proveedor/89938577?source=guatecompras",
+    "status": "ENCONTRADO",
+    "data": {
+      "NIT": "89938577",
+      "Nombre o razón social": "WILLIAM DAVID QUINÁ SIMÓN",
+      "Representantes": [],
+      "Comercios": [],
+      "Especialidades": [],
+      "Solicitudes": []
+    }
+  },
+  {
+    "nit": "11810815",
+    "url": "https://sistema.rgae.gob.gt/consulta-proveedores/proveedor/11810815?source=guatecompras",
+    "status": "ENCONTRADO",
+    "data": {
+      "NIT": "11810815",
+      "Nombre o razón social": "ERITA MARELÍ POLANCO MEDRANO",
+      "Representantes": [],
+      "Comercios": [],
+      "Especialidades": [],
+      "Solicitudes": []
+    }
+  },
+  {
+    "nit": "120713128",
+    "url": "https://sistema.rgae.gob.gt/consulta-proveedores/proveedor/120713128?source=guatecompras",
+    "status": "ENCONTRADO",
+    "data": {
+      "NIT": "120713128",
+      "Nombre o razón social": "ANIMAL WORLD, SOCIEDAD ANÓNIMA",
+      "Representantes": [],
+      "Comercios": [],
+      "Especialidades": [],
+      "Solicitudes": []
+    }
+  },
+  {
+    "nit": "1204076",
+    "url": "https://sistema.rgae.gob.gt/consulta-proveedores/proveedor/1204076?source=guatecompras",
+    "status": "ENCONTRADO",
+    "data": {
+      "Representantes": [],
+      "Comercios": [],
+      "Especialidades": [],
+      "Solicitudes": []
+    }
+  },
+  {
+    "nit": "120909758",
+    "url": "https://sistema.rgae.gob.gt/consulta-proveedores/proveedor/120909758?source=guatecompras",
+    "status": "ENCONTRADO",
+    "data": {
+      "Representantes": [],
+      "Comercios": [],
+      "Especialidades": [],
+      "Solicitudes": []
+    }
+  },
+  {
+    "nit": "120831147",
+    "url": "https://sistema.rgae.gob.gt/consulta-proveedores/proveedor/120831147?source=guatecompras",
+    "status": "ENCONTRADO",
+    "data": {
+      "Representantes": [],
+      "Comercios": [],
+      "Especialidades": [],
+      "Solicitudes": []
+    }
+  }
+]

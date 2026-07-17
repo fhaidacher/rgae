@@ -566,5 +566,330 @@
       "Especialidades": [],
       "Solicitudes": []
     }
+  },
+  {
+    "nit": "120588382",
+    "url": "https://sistema.rgae.gob.gt/consulta-proveedores/proveedor/120588382?source=guatecompras",
+    "status": "ENCONTRADO",
+    "data": {
+      "NIT": "120588382",
+      "Nombre o razón social": "CENTRO DE SERVICIO AUTOMOTRIZ PROLUB, SOCIEDAD ANÓNIMA",
+      "Representantes": [],
+      "Comercios": [],
+      "Especialidades": [],
+      "Solicitudes": []
+    }
+  },
+  {
+    "nit": "326630376",
+    "url": "https://sistema.rgae.gob.gt/consulta-proveedores/proveedor/326630376?source=guatecompras",
+    "status": "ENCONTRADO",
+    "data": {
+      "NIT": "326630376",
+      "Nombre o razón social": "CLETO ALEXANDER MATZAR CHIC",
+      "Representantes": [],
+      "Comercios": [],
+      "Especialidades": [],
+      "Solicitudes": []
+    }
+  },
+  {
+    "nit": "44834616",
+    "url": "https://sistema.rgae.gob.gt/consulta-proveedores/proveedor/44834616?source=guatecompras",
+    "status": "ENCONTRADO",
+    "data": {
+      "NIT": "44834616",
+      "Nombre o razón social": "RENNER, SOCIEDAD ANONIMA",
+      "Estado Actual": "No Actualizado",
+      "Fecha de Inscripción": "09/08/2021",
+      "Representantes": [
+        {
+          "nit": "6839487",
+          "pais": "Guatemala",
+          "pasaporte": "",
+          "nombre": "GUILLERMO RODRIGUEZ ROSALES"
+        },
+        {
+          "nit": "14192292",
+          "pais": "Guatemala",
+          "pasaporte": "",
+          "nombre": "INGRID CARINA GARCÍA HURTARTE DE RODRIGUEZ"
+        }
+      ],
+      "Comercios": [
+        {
+          "nombre": "RENNER",
+          "direccion": "8 AVENIDA ZONA 3 COLONIA COVINTA LOTE 481 VILLA NUEVA,GUATEMALA"
+        }
+      ],
+      "Especialidades": [],
+      "Solicitudes": [
+        {
+          "numero": "ACSO202239691",
+          "tipo": "Actualización de inscripción de sociedad",
+          "estado": "Finalizada",
+          "fechaAprobacion": "21/02/2022",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "INSS2021123814",
+          "tipo": "Inscripción de Sociedad",
+          "estado": "Finalizada",
+          "fechaAprobacion": "09/08/2021",
+          "constancia": "",
+          "resolucion": ""
+        }
+      ]
+    }
+  },
+  {
+    "nit": "120268647",
+    "url": "https://sistema.rgae.gob.gt/consulta-proveedores/proveedor/120268647?source=guatecompras",
+    "status": "ENCONTRADO",
+    "data": {
+      "NIT": "120268647",
+      "Nombre o razón social": "WALLTECH, SOCIEDAD ANÓNIMA",
+      "Representantes": [],
+      "Comercios": [],
+      "Especialidades": [],
+      "Solicitudes": []
+    }
+  },
+  {
+    "nit": "120653362",
+    "url": "https://sistema.rgae.gob.gt/consulta-proveedores/proveedor/120653362?source=guatecompras",
+    "status": "ENCONTRADO",
+    "data": {
+      "NIT": "120653362",
+      "Nombre o razón social": "COMERCIALIZADORA GH, SOCIEDAD ANÓNIMA",
+      "Representantes": [],
+      "Comercios": [],
+      "Especialidades": [],
+      "Solicitudes": []
+    }
+  },
+  {
+    "nit": "76135519",
+    "url": "https://sistema.rgae.gob.gt/consulta-proveedores/proveedor/76135519?source=guatecompras",
+    "status": "ENCONTRADO",
+    "data": {
+      "NIT": "76135519",
+      "Nombre o razón social": "ALEXANDER  SAMAYOA ARGUETA",
+      "Estado Actual": "Inscrito",
+      "Fecha de Inscripción": "20/02/2019",
+      "Representantes": [],
+      "Comercios": [
+        {
+          "nombre": "COSMOS DISTRIBUIDORA",
+          "direccion": "1 CALLE 20-10 ZONA 17 CONDOMINIO FLORENTINA PREMIER CASA D-25 GUATEMALA,GUATEMALA"
+        }
+      ],
+      "Especialidades": [],
+      "Solicitudes": [
+        {
+          "numero": "ACCI202610123",
+          "tipo": "Actualización de inscripción de comerciante individual",
+          "estado": "Finalizada",
+          "fechaAprobacion": "05/01/2026",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "ACCI20259038",
+          "tipo": "Actualización de inscripción de comerciante individual",
+          "estado": "Finalizada",
+          "fechaAprobacion": "07/01/2025",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "ACCI20246804",
+          "tipo": "Actualización de inscripción de comerciante individual",
+          "estado": "Finalizada",
+          "fechaAprobacion": "10/01/2024",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "ACCI2023659",
+          "tipo": "Actualización de inscripción de comerciante individual",
+          "estado": "Finalizada",
+          "fechaAprobacion": "09/01/2023",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "CICI2022118175",
+          "tipo": "Constancia adicional de inscripción de comerciante individual",
+          "estado": "Finalizada",
+          "fechaAprobacion": "09/08/2022",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "ACCI20222754",
+          "tipo": "Actualización de inscripción de comerciante individual",
+          "estado": "Finalizada",
+          "fechaAprobacion": "15/02/2022",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "ACCI202111392",
+          "tipo": "Actualización de inscripción de comerciante individual",
+          "estado": "Finalizada",
+          "fechaAprobacion": "04/03/2021",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "CICI2020102173",
+          "tipo": "Constancia adicional de inscripción de comerciante individual",
+          "estado": "Finalizada",
+          "fechaAprobacion": "04/08/2020",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "ACCI202049012",
+          "tipo": "Actualización de inscripción de comerciante individual",
+          "estado": "Finalizada",
+          "fechaAprobacion": "11/02/2020",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "CICI201968149",
+          "tipo": "Constancia adicional de inscripción de comerciante individual",
+          "estado": "Finalizada",
+          "fechaAprobacion": "23/07/2019",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "INSC20186357",
+          "tipo": "Inscripción de Comerciante Individual",
+          "estado": "Finalizada",
+          "fechaAprobacion": "20/02/2019",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "CTP20199863",
+          "tipo": "Inscripcion y precalificacion transitoria Bienes y Servicios",
+          "estado": "Finalizada",
+          "fechaAprobacion": "14/01/2019",
+          "constancia": "",
+          "resolucion": ""
+        }
+      ]
+    }
+  },
+  {
+    "nit": "74523546",
+    "url": "https://sistema.rgae.gob.gt/consulta-proveedores/proveedor/74523546?source=guatecompras",
+    "status": "ENCONTRADO",
+    "data": {
+      "NIT": "74523546",
+      "Nombre o razón social": "JORGE LUIS SOMOCURCIO RAMOS",
+      "Estado Actual": "Inscrito",
+      "Fecha de Inscripción": "28/12/2021",
+      "Fecha Última Precalificación": "28/12/2021",
+      "Tipo de Precalificación": "Precalificacion de Bienes, Servicios y Suministros",
+      "Vigencia de Última Precalificación": "28/12/2023",
+      "Representantes": [],
+      "Comercios": [
+        {
+          "nombre": "DISTRIBUIDORA CONTINENTAL",
+          "direccion": "AVENIDA PETAPA 42-85 ZONA 12 BODEGA 7 GUATEMALA,GUATEMALA"
+        },
+        {
+          "nombre": "HERRAMIENTAS INTEGRALES",
+          "direccion": "AVENIDA PETAPA 42-85 ZONA 12 CONDOMINIO EMPRESARIAL PETAPA BODEGA 7 GUATEMALA,GUATEMALA"
+        },
+        {
+          "nombre": "CULTURA 502",
+          "direccion": "AVENIDA PETAPA 42-85 ZONA 12 BODEGA 7 GUATEMALA,GUATEMALA"
+        }
+      ],
+      "Especialidades": [],
+      "Solicitudes": [
+        {
+          "numero": "ACCI202611144",
+          "tipo": "Actualización de inscripción de comerciante individual",
+          "estado": "Finalizada",
+          "fechaAprobacion": "22/01/2026",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "ACCI202514818",
+          "tipo": "Actualización de inscripción de comerciante individual",
+          "estado": "Finalizada",
+          "fechaAprobacion": "08/01/2025",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "ACCI2024477",
+          "tipo": "Actualización de inscripción de comerciante individual",
+          "estado": "Finalizada",
+          "fechaAprobacion": "05/02/2024",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "ACCI20238568",
+          "tipo": "Actualización de inscripción de comerciante individual",
+          "estado": "Finalizada",
+          "fechaAprobacion": "24/01/2023",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "ACCI202271580",
+          "tipo": "Actualización de inscripción de comerciante individual",
+          "estado": "Finalizada",
+          "fechaAprobacion": "02/03/2022",
+          "constancia": "",
+          "resolucion": ""
+        },
+        {
+          "numero": "IPRP2021133955",
+          "tipo": "Inscripción y precalificación comerciante individual proveedores de bienes, suministros y servicios",
+          "estado": "Finalizada",
+          "fechaAprobacion": "28/12/2021",
+          "constancia": "",
+          "resolucion": ""
+        }
+      ]
+    }
+  },
+  {
+    "nit": "103387226",
+    "url": "https://sistema.rgae.gob.gt/consulta-proveedores/proveedor/103387226?source=guatecompras",
+    "status": "ENCONTRADO",
+    "data": {
+      "NIT": "103387226",
+      "Nombre o razón social": "VILMA MANUELA XIRÚM MATEO",
+      "Representantes": [],
+      "Comercios": [],
+      "Especialidades": [],
+      "Solicitudes": []
+    }
+  },
+  {
+    "nit": "113699654",
+    "url": "https://sistema.rgae.gob.gt/consulta-proveedores/proveedor/113699654?source=guatecompras",
+    "status": "ENCONTRADO",
+    "data": {
+      "NIT": "113699654",
+      "Nombre o razón social": "EDGAR JHONY SANTIZO DE LEÓN",
+      "Representantes": [],
+      "Comercios": [],
+      "Especialidades": [],
+      "Solicitudes": []
+    }
   }
 ]

@@ -185,7 +185,7 @@
     /* Timeout settings panel */
     .timeout-settings {
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       gap: 24px;
       margin-top: 16px;
       padding: 12px 18px;
@@ -275,6 +275,92 @@
       font-size: 0.68rem;
       color: #a0aec0;
       font-weight: 500;
+    }
+
+    /* Pills de Fase en fila (Ajustado para 1 línea) */
+    .fase-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      border-radius: 30px;
+      border: 1px solid #e2e8f0;
+      background: #f8fafc;
+      font-size: 1rem;
+      font-family: monospace;
+      color: #718096;
+      white-space: nowrap;
+      transition: all 0.2s;
+    }
+
+    /* Colores únicos por fase */
+    #faseRed {
+      --f-color: #3182ce;
+      --f-bg: rgba(49, 130, 206, 0.1);
+    }
+
+    #faseCf {
+      --f-color: #dd6b20;
+      --f-bg: rgba(221, 107, 32, 0.1);
+    }
+
+    #faseEspera {
+      --f-color: #805ad5;
+      --f-bg: rgba(128, 90, 213, 0.1);
+    }
+
+    #faseCarga {
+      --f-color: #319795;
+      --f-bg: rgba(49, 151, 149, 0.1);
+    }
+
+    #faseExtrayendo {
+      --f-color: #e53e3e;
+      --f-bg: rgba(229, 62, 62, 0.1);
+    }
+
+    .fase-pill.fase-active {
+      background: var(--f-bg);
+      border-color: var(--f-color);
+      color: var(--f-color);
+      font-weight: 700;
+      box-shadow: 0 0 0 2px var(--f-bg);
+    }
+
+    .fase-pill.fase-done {
+      background: var(--f-bg);
+      border-color: var(--f-color);
+      color: var(--f-color);
+      opacity: 0.9;
+    }
+
+    .fase-pill-total {
+      background: rgba(26, 54, 93, 0.07) !important;
+      border-color: rgba(26, 54, 93, 0.3) !important;
+      color: #1a365d !important;
+      font-weight: 700;
+      padding: 6px 16px;
+    }
+
+    .fp-label {
+      font-size: 1.1rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      opacity: 0.85;
+    }
+
+    .fp-val {
+      font-size: 1.25rem;
+      font-weight: 700;
+      min-width: 50px;
+      text-align: right;
+    }
+
+    .fp-sep {
+      color: #cbd5e0;
+      font-size: 1.4rem;
+      margin: 0 4px;
     }
 
     @media (max-width: 576px) {
@@ -430,8 +516,8 @@
           <span class="timeout-label"><i class="bi bi-sliders me-1"></i> Tiempos</span>
           <span id="configSaveStatus" style="font-size:0.7rem;color:#38a169;font-weight:600;"></span>
 
-          <div class="timeout-group" style="display: none;">
-            <span class="timeout-label">General / Entre NITs</span>
+          <div class="timeout-group">
+            <span class="timeout-label">Tiempo entre NITs</span>
             <div class="timeout-spinner-wrap">
               <input type="number" id="inputTimeoutGeneral" value="30" min="1" max="120" onchange="guardarConfig()">
               <div class="spin-btn" onclick="spinChange('inputTimeoutGeneral', 1)" title="Subir"><span>▲</span></div>
@@ -440,7 +526,7 @@
             <span class="timeout-unit">segundos</span>
           </div>
 
-          <div class="timeout-group" style="display: none;">
+          <div class="timeout-group">
             <span class="timeout-label">Cloudflare</span>
             <div class="timeout-spinner-wrap">
               <input type="number" id="inputTimeoutCloudflare" value="1" min="1" max="300" onchange="guardarConfig()">
@@ -484,6 +570,96 @@
             <span class="timeout-unit"># intentos</span>
           </div>
 
+          <!-- Cronómetros NIT y Total -->
+          <div class="timeout-group border-start ps-3 ms-2" id="nitTimerGroup"
+            style="display: flex; flex-direction: column; align-items: flex-start; gap: 4px;">
+            <span class="timeout-label text-warning mb-0" style="font-size: 0.65rem;"><i
+                class="bi bi-hourglass-split"></i> NIT Actual:</span>
+            <span class="fw-bold text-dark" style="font-family: monospace; font-size: 1.2rem; min-width: 45px;"
+              id="nitTimerVal">0.0s</span>
+          </div>
+
+          <div class="timeout-group border-start ps-3 ms-2" id="globalTimerGroup"
+            style="display: flex; flex-direction: column; align-items: flex-start; gap: 4px;">
+            <span class="timeout-label text-info mb-0" style="font-size: 0.65rem;"><i class="bi bi-stopwatch"></i>
+              Tiempo Total:</span>
+            <span class="fw-bold text-dark" style="font-family: monospace; font-size: 1.2rem; min-width: 45px;"
+              id="globalTimerVal">0:00</span>
+          </div>
+
+          <div class="timeout-group border-start ps-3 ms-2" id="historyTimerGroup"
+            style="display: flex; flex-direction: column; align-items: flex-start; gap: 6px;">
+            <span class="timeout-label text-muted mb-0" style="font-size: 0.65rem;"><i class="bi bi-history"></i>
+              Histórico:</span>
+            <div id="nitHistoryList"
+              style="font-family: monospace; font-size: 1rem; font-weight: 600; color: #4a5568; display: flex; flex-direction: column; gap: 4px;">
+              <span class="text-muted">-</span>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Panel de cronometros de fase (fila unica) -->
+    <div id="nitHistoryGroup" class="card mb-3 shadow-sm" style="border-radius: 10px; border: 1px solid rgba(26,54,93,0.12);">
+      <div class="card-body d-flex align-items-center flex-wrap" style="padding: 14px 20px; gap: 0; row-gap: 12px;">
+
+        <!-- Fases en fila -->
+        <div
+          style="display:flex; align-items:center; gap: 4px; flex-wrap: nowrap; flex: 1; min-width: 0; overflow-x: auto; padding-bottom: 4px;">
+          <span
+            style="font-size:0.75rem; font-weight:700; text-transform:uppercase; letter-spacing:0.05em; color:#718096; white-space:nowrap; margin-right:4px;">
+            <i class="bi bi-activity"></i> Fases:
+          </span>
+
+          <span class="fase-pill" id="faseRed">
+            <i class="bi bi-wifi"></i>
+            <span class="fp-label">Red</span>
+            <span class="fp-val" id="faseRedVal">-</span>
+          </span>
+
+          <span class="fp-sep">›</span>
+
+          <span class="fase-pill" id="faseCf">
+            <i class="bi bi-shield-lock"></i>
+            <span class="fp-label">CLOUDFLARE</span>
+            <span class="fp-val" id="faseCfVal">-</span>
+          </span>
+
+          <span class="fp-sep">›</span>
+
+          <span class="fase-pill" id="faseEspera">
+            <i class="bi bi-hourglass"></i>
+            <span class="fp-label">Espera</span>
+            <span class="fp-val" id="faseEsperaVal">-</span>
+          </span>
+
+          <span class="fp-sep">›</span>
+
+          <span class="fase-pill" id="faseCarga">
+            <i class="bi bi-cloud-download"></i>
+            <span class="fp-label">Carga</span>
+            <span class="fp-val" id="faseCargaVal">-</span>
+          </span>
+
+          <span class="fp-sep">›</span>
+
+          <span class="fase-pill" id="faseExtrayendo">
+            <i class="bi bi-database-check"></i>
+            <span class="fp-label">Extrae</span>
+            <span class="fp-val" id="faseExtrayendoVal">-</span>
+          </span>
+
+          <span class="fp-sep">=</span>
+
+          <!-- TOTAL -->
+          <span class="fase-pill fase-pill-total" id="faseTotalCard">
+            <i class="bi bi-stopwatch-fill"></i>
+            <span class="fp-label">TOTAL</span>
+            <span class="fp-val" id="faseTotalVal">-</span>
+          </span>
         </div>
 
       </div>
@@ -620,9 +796,191 @@
     let resultados = [];
     let pollInterval = null;
     let knownRunId = null;  // Detecta cuándo hay una nueva ejecución
-    const POLL_INTERVAL_SEC = 2;
+    let lastCompletedNitsCount = 0; // Monitorea los NITs completados en tiempo real
+    const POLL_INTERVAL_SEC = 0.5; // Frecuencia de actualización de la consola (medio segundo)
 
     let configSaveTimer = null;
+
+    // Estado de los cronómetros
+    let currentNit = null;
+    let nitStartTime = null;
+    let globalStartTime = null;
+    let timerInterval = null;
+    let ultimosNits = []; // Historial de los últimos 3 NITs [{ nit, tiempo }]
+    let lastFase = null;       // Nombre de la última fase recibida
+    let lastFaseStart = null;  // Timestamp de inicio de la última fase
+    let faseTimestamps = {};   // Guarda el tiempo final de cada fase para el NIT actual
+
+    function iniciarCronometros(baseStartTime = null) {
+      if (timerInterval) clearInterval(timerInterval);
+
+      globalStartTime = baseStartTime || Date.now();
+      nitStartTime = Date.now();
+      currentNit = null;
+      ultimosNits = []; // Limpiar historial en nueva ejecución
+      actualizarHistorialUI();
+
+      document.getElementById('nitTimerGroup').style.display = 'flex';
+      document.getElementById('globalTimerGroup').style.display = 'flex';
+      document.getElementById('nitHistoryGroup').style.display = 'flex';
+
+      timerInterval = setInterval(() => {
+        // Actualizar Cronómetro Global
+        const globalElapsed = Date.now() - globalStartTime;
+        const totalSecs = Math.floor(globalElapsed / 1000);
+        const mins = Math.floor(totalSecs / 60);
+        const secs = totalSecs % 60;
+        document.getElementById('globalTimerVal').textContent = `${mins}:${String(secs).padStart(2, '0')}`;
+
+        // Actualizar Cronómetro NIT
+        // Actualizar Cronómetro NIT
+        const nitElapsed = Date.now() - nitStartTime;
+        const nitSecs = (nitElapsed / 1000).toFixed(1);
+        document.getElementById('nitTimerVal').textContent = `${nitSecs}s`;
+
+        // Tick en vivo de la fase activa
+        if (lastFase && lastFaseStart) {
+          const idMap = { RED: 'Red', CF: 'Cf', ESPERA: 'Espera', CARGA: 'Carga', EXTRAYENDO: 'Extrayendo' };
+          const key = idMap[lastFase];
+          if (key) {
+            const elMs = Date.now() - lastFaseStart;
+            const valEl = document.getElementById(`fase${key}Val`);
+            if (valEl) valEl.textContent = `${(elMs / 1000).toFixed(2)}s`;
+          }
+        }
+      }, 100);
+    }
+
+    function detenerCronometros() {
+      // Congelar la última fase activa
+      if (lastFase && lastFaseStart) {
+        const idMap = { RED: 'Red', CF: 'Cf', ESPERA: 'Espera', CARGA: 'Carga', EXTRAYENDO: 'Extrayendo' };
+        const key = idMap[lastFase];
+        if (key) {
+          const durMs = Date.now() - lastFaseStart;
+          const val = document.getElementById(`fase${key}Val`);
+          if (val) val.textContent = `${(durMs / 1000).toFixed(2)}s`;
+          const badge = document.getElementById(`fase${key}Badge`);
+          if (badge) badge.textContent = '✔️';
+          const card = document.getElementById(`fase${key}`);
+          if (card) { card.classList.remove('fase-active'); card.classList.add('fase-done'); }
+        }
+      }
+
+      if (timerInterval) {
+        clearInterval(timerInterval);
+        timerInterval = null;
+      }
+
+      // Guardar el tiempo final del último NIT procesado
+      if (currentNit && nitStartTime) {
+        const transcurrido = Date.now() - nitStartTime;
+        registrarTiempoNit(currentNit, transcurrido);
+      }
+
+      document.getElementById('nitTimerVal').textContent = '0.0s';
+      currentNit = null;
+    }
+
+    function registrarTiempoNit(nit, ms) {
+      if (!nit) return;
+      const segs = (ms / 1000).toFixed(1);
+      ultimosNits.unshift({ nit, tiempo: `${segs}s` });
+
+      // Mantener solo los últimos 3
+      if (ultimosNits.length > 3) {
+        ultimosNits.pop();
+      }
+      actualizarHistorialUI();
+    }
+
+    function actualizarHistorialUI() {
+      const container = document.getElementById('nitHistoryList');
+      if (!container) return;
+
+      if (ultimosNits.length === 0) {
+        container.innerHTML = '<span class="text-muted">-</span>';
+        return;
+      }
+
+      container.innerHTML = ultimosNits
+        .map(item => `<div style="background: rgba(0,0,0,0.03); border: 1px solid #e2e8f0; border-radius: 6px; padding: 4px 8px; font-size: 0.9rem;"><i class="bi bi-hash text-muted"></i>${item.nit} <span style="opacity: 0.5;">→</span> <span class="text-success fw-bold" style="font-size: 1.05rem;">${item.tiempo}</span></div>`)
+        .join('');
+    }
+
+    function detectarCambioNit(logText) {
+      if (!logText) return;
+      // Regex para capturar [index/total] NIT ->
+      const regex = /\[\d+\/\d+\]\s+(\w+)\s+→/g;
+      let match;
+      let ultimoNit = null;
+
+      // Encontrar la última coincidencia en el log
+      while ((match = regex.exec(logText)) !== null) {
+        ultimoNit = match[1];
+      }
+
+      if (ultimoNit && ultimoNit !== currentNit) {
+        // Si ya había un NIT procesándose, registrar cuánto tiempo tardó
+        if (currentNit && nitStartTime) {
+          const transcurrido = Date.now() - nitStartTime;
+          registrarTiempoNit(currentNit, transcurrido);
+        }
+
+        currentNit = ultimoNit;
+        nitStartTime = Date.now(); // Reiniciar cronómetro del NIT individual
+        faseTimestamps = {}; // Reiniciar historial de fases
+        resetFaseChips();    // Limpiar chips visuales
+      }
+    }
+
+    function resetFaseChips() {
+      ['Red', 'Cf', 'Espera', 'Carga', 'Extrayendo'].forEach(f => {
+        const card = document.getElementById(`fase${f}`);
+        const val = document.getElementById(`fase${f}Val`);
+        const badge = document.getElementById(`fase${f}Badge`);
+        if (card) { card.classList.remove('fase-active', 'fase-done'); }
+        if (val) val.textContent = '-';
+        if (badge) badge.textContent = '';
+      });
+      const tv = document.getElementById('faseTotalVal');
+      if (tv) tv.textContent = '-';
+      lastFase = null;
+      lastFaseStart = null;
+    }
+
+    function actualizarFase(faseName, faseStartTs) {
+      if (!faseName || !faseStartTs) return;
+
+      const idMap = { RED: 'Red', CF: 'Cf', ESPERA: 'Espera', CARGA: 'Carga', EXTRAYENDO: 'Extrayendo' };
+      const key = idMap[faseName];
+      if (!key) return;
+
+      // Si la fase cambió, fijar el tiempo de la fase anterior como terminado
+      if (lastFase && lastFase !== faseName && lastFaseStart) {
+        const prevKey = idMap[lastFase];
+        if (prevKey) {
+          const durMs = faseStartTs - lastFaseStart;
+          const val = document.getElementById(`fase${prevKey}Val`);
+          if (val) val.textContent = `${(durMs / 1000).toFixed(2)}s`;
+          const badge = document.getElementById(`fase${prevKey}Badge`);
+          if (badge) badge.textContent = `✔️`;
+          const card = document.getElementById(`fase${prevKey}`);
+          if (card) { card.classList.remove('fase-active'); card.classList.add('fase-done'); }
+        }
+      }
+
+      // Si es una nueva fase que todavía no marcamos activa
+      if (lastFase !== faseName) {
+        const prevCard = lastFase ? document.getElementById(`fase${idMap[lastFase]}`) : null;
+        if (prevCard) prevCard.classList.remove('fase-active');
+        const card = document.getElementById(`fase${key}`);
+        if (card) { card.classList.remove('fase-done'); card.classList.add('fase-active'); }
+      }
+
+      lastFase = faseName;
+      lastFaseStart = faseStartTs;
+    }
 
     function spinChange(id, delta) {
       const input = document.getElementById(id);
@@ -686,47 +1044,104 @@
         if (data.status === 'started') {
           // Registrar inmediatamente el runId del nuevo proceso
           knownRunId = data.runId;
-
-          pollInterval = setInterval(async () => {
-            try {
-              const res = await fetch('http://localhost:3000/api/running');
-              const data = await res.json();
-
-              // Si el servidor reporta un runId diferente al que conocemos,
-              // significa que una nueva ejecución comenzó (ej: doble clic).
-              // Limpiamos la pantalla para no mostrar contenido de la ejecución anterior.
-              if (data.runId && data.runId !== knownRunId) {
-                knownRunId = data.runId;
-                document.getElementById('consoleOutput').textContent = '';
-              }
-
-              if (data.log) {
-                const consoleDiv = document.getElementById('consoleSection').querySelector('.card-body');
-                // Solo hacer auto-scroll si el usuario ya está cerca del fondo (±50px)
-                const estaAlFondo = consoleDiv.scrollHeight - consoleDiv.scrollTop - consoleDiv.clientHeight < 50;
-                document.getElementById('consoleOutput').textContent = data.log;
-                if (estaAlFondo) {
-                  consoleDiv.scrollTop = consoleDiv.scrollHeight;
-                }
-              }
-
-              if (data.completed) {
-                clearInterval(pollInterval);
-                pollInterval = null;
-                document.getElementById('consoleStatus').textContent = 'Completado';
-                document.getElementById('consoleStatus').className = 'badge bg-info';
-                cargarDatos();
-              }
-            } catch (e) {
-              console.error('Error polling scraper status:', e);
-            }
-          }, POLL_INTERVAL_SEC * 1000);
+          iniciarPolling(data.runId);
         } else {
           alert('Error al iniciar scraper');
         }
       } catch (e) {
         alert('Error al iniciar scraper: ' + e.message);
       }
+    }
+
+    function iniciarPolling(runId) {
+      if (pollInterval) return; // Ya está corriendo un sondeo
+
+      pollInterval = setInterval(async () => {
+        try {
+          const res = await fetch('http://localhost:3000/api/running');
+          const data = await res.json();
+
+          // Iniciar cronómetros solo cuando el bucle de extracción realmente inicia
+          // (Usa loopStart del server, o cae en runId como fallback si no se ha reiniciado el backend y el bucle ya corre)
+          const startTime = data.loopStart || (data.log && data.log.includes('--- INICIANDO BUCLE DE EXTRACCIÓN ---') ? data.runId : null);
+          if (startTime && !timerInterval) {
+            iniciarCronometros(startTime);
+          }
+
+          // Si el servidor reporta un runId diferente al que conocemos,
+          // significa que una nueva ejecución comenzó (ej: doble clic).
+          // Limpiamos la pantalla para no mostrar contenido de la ejecución anterior.
+          if (data.runId && data.runId !== knownRunId) {
+            knownRunId = data.runId;
+            document.getElementById('consoleOutput').textContent = '';
+            lastCompletedNitsCount = 0;
+          }
+
+          if (data.log) {
+            const consoleDiv = document.getElementById('consoleSection').querySelector('.card-body');
+            // Solo hacer auto-scroll si el usuario ya está cerca del fondo (±50px)
+            const estaAlFondo = consoleDiv.scrollHeight - consoleDiv.scrollTop - consoleDiv.clientHeight < 50;
+            document.getElementById('consoleOutput').textContent = data.log;
+            if (estaAlFondo) {
+              consoleDiv.scrollTop = consoleDiv.scrollHeight;
+            }
+            detectarCambioNit(data.log); // Monitorear cambio de NIT para reiniciar el cronómetro
+            actualizarFase(data.currentFase, data.faseStart); // Actualizar indicador de fase activa
+
+            // Actualizar tabla de resultados en tiempo real cuando un NIT finaliza
+            const completedMatches = data.log.match(/✅ OK:|❌ NIT no registrado/g);
+            const completedCount = completedMatches ? completedMatches.length : 0;
+            if (completedCount > lastCompletedNitsCount) {
+              lastCompletedNitsCount = completedCount;
+              cargarDatos(); // Actualiza la tabla inferior al instante
+            }
+
+            // Parsear últimas fases finales del log
+            const logLines = data.log.split('\n').filter(l => l.includes('Red:') && l.includes('CF:') && l.includes('TOTAL:'));
+            if (logLines.length > 0 && !lastFase) {
+              const lastLine = logLines[logLines.length - 1];
+              const mRed = lastLine.match(/Red:\s*([\d.]+)s/);
+              const mCf = lastLine.match(/CF:\s*([\d.]+)s/);
+              const mEsp = lastLine.match(/Espera:\s*([\d.]+)s/);
+              const mCar = lastLine.match(/Carga:\s*([\d.]+)s/);
+              const mExt = lastLine.match(/Extrae:\s*([\d.]+)s/);
+              const mTot = lastLine.match(/TOTAL:\s*([\d.]+)s/);
+              const setDone = (id, val) => {
+                const el = document.getElementById(id + 'Val'); if (el) el.textContent = val + 's';
+                document.getElementById(id)?.classList.add('fase-done');
+              };
+              if (mRed) setDone('faseRed', mRed[1]);
+              if (mCf) setDone('faseCf', mCf[1]);
+              if (mEsp) setDone('faseEspera', mEsp[1]);
+              if (mCar) setDone('faseCarga', mCar[1]);
+              if (mExt) setDone('faseExtrayendo', mExt[1]);
+              if (mTot) { const tv = document.getElementById('faseTotalVal'); if (tv) tv.textContent = mTot[1] + 's'; }
+            }
+
+            if (data.log.includes('RESUMEN:') || data.log.includes('Navegador cerrado por el usuario') || data.log.includes('Scraper abortado')) {
+              detenerCronometros(); // Detener inmediatamente los cronómetros cuando finaliza o se aborta
+            }
+          }
+
+          const statusBadge = document.getElementById('consoleStatus');
+          if (data.running) {
+            statusBadge.textContent = 'Ejecutando...';
+            statusBadge.className = 'badge bg-success';
+          } else {
+            statusBadge.textContent = data.completed ? 'Completado' : 'Inactivo';
+            statusBadge.className = data.completed ? 'badge bg-info' : 'badge bg-secondary';
+          }
+
+          if (data.completed || !data.running) {
+            clearInterval(pollInterval);
+            pollInterval = null;
+            detenerCronometros(); // Detener cronómetros al finalizar
+            cargarDatos();
+          }
+        } catch (e) {
+          console.error('Error polling scraper status:', e);
+        }
+      }, POLL_INTERVAL_SEC * 1000);
     }
 
     function recargarDatos() {
@@ -814,11 +1229,40 @@
       window.open('proveedores_rgae.json', '_blank');
     }
 
-    function toggleConsole() {
+    async function toggleConsole() {
       const consoleSection = document.getElementById('consoleSection');
       if (consoleSection.style.display === 'none') {
+        try {
+          const res = await fetch('http://localhost:3000/api/running');
+          const data = await res.json();
+          if (data.log) {
+            document.getElementById('consoleOutput').textContent = data.log;
+          } else {
+            document.getElementById('consoleOutput').textContent = 'Consola vacía o sin registros.';
+          }
+
+          const statusBadge = document.getElementById('consoleStatus');
+          if (data.running) {
+            statusBadge.textContent = 'Ejecutando...';
+            statusBadge.className = 'badge bg-success';
+            knownRunId = data.runId;
+            iniciarCronometros(data.runId); // Iniciar cronómetros en la consola manual
+            iniciarPolling(data.runId); // Iniciar actualización periódica de inmediato
+          } else {
+            statusBadge.textContent = data.completed ? 'Completado' : 'Inactivo';
+            statusBadge.className = data.completed ? 'badge bg-info' : 'badge bg-secondary';
+          }
+        } catch (e) {
+          console.warn('No se pudo cargar el log de la consola:', e);
+        }
+
         consoleSection.style.display = 'block';
         consoleSection.scrollIntoView({ behavior: 'smooth' });
+
+        const consoleDiv = consoleSection.querySelector('.card-body');
+        if (consoleDiv) {
+          consoleDiv.scrollTop = consoleDiv.scrollHeight;
+        }
       } else {
         consoleSection.style.display = 'none';
       }
@@ -954,10 +1398,22 @@
       }
     }
 
-    window.onload = () => {
+    window.onload = async () => {
       cargarDatos();
       actualizarNitsUI();
       cargarConfig();  // ← carga valores persistidos desde config.json
+
+      // Verificar si el scraper ya está ejecutándose al cargar la página
+      try {
+        const res = await fetch('http://localhost:3000/api/running');
+        const data = await res.json();
+        if (data.running) {
+          knownRunId = data.runId;
+          document.getElementById('consoleSection').style.display = 'block';
+          document.getElementById('nitHistoryGroup').style.display = 'flex'; // Mostrar historial al restaurar
+          iniciarPolling(data.runId);
+        }
+      } catch (e) { }
     };
   </script>
 </body>
