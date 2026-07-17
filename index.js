@@ -55,7 +55,7 @@ const TIMEOUT_RESOLVER_CAPTCHA = TIMEOUT_GENERAL;
 
 // Limitar a ~10 registros por minuto (1 registro cada 6 segundos) para evitar bloqueos
 const TIMEOUT_ENTRE_NITS = parseFloat(process.env.TIMEOUT_GENERAL) || _cfg.timeoutGeneral || 5;
-const TIMEOUT_ENTRE_NITS_RAPIDO = parseFloat(process.env.TIMEOUT_ENTRE_NITS_RAPIDO) || _cfg.timeoutEntreNitsRapido || 3;
+const TIMEOUT_ENTRE_NITS_RAPIDO = parseFloat(process.env.TIMEOUT_ENTRE_NITS_RAPIDO) || _cfg.timeoutEntreNitsRapido || 5;
 const TIMEOUT_NAVEGACION_INICIAL = TIMEOUT_GENERAL;
 
 
