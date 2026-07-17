@@ -1,5 +1,5 @@
 {
-  "timeoutGeneral": 30,
+  "timeoutGeneral": 10,
   "timeoutCloudflare": 5,
   "timeoutFastFailMs": 250,
   "pausaEntreReintentos": 250,
