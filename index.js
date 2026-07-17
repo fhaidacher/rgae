@@ -42,7 +42,7 @@ try {
 // Prioridad: variable de entorno > config.json > valor hardcoded
 const TIMEOUT_GENERAL = parseFloat(process.env.TIMEOUT_GENERAL) || _cfg.timeoutGeneral || 30;
 const TIMEOUT_WAIT_CLOUDFLARE = parseFloat(process.env.TIMEOUT_WAIT_CLOUDFLARE) || _cfg.timeoutCloudflare || 1;
-const TIMEOUT_FAST_FAIL_MS = parseInt(process.env.TIMEOUT_FAST_FAIL_MS) || _cfg.timeoutFastFailMs || 500;
+const TIMEOUT_FAST_FAIL_MS = parseInt(process.env.TIMEOUT_FAST_FAIL_MS) || _cfg.timeoutFastFailMs || 1000;
 const PAUSA_ENTRE_REINTENTOS_MS = parseInt(process.env.PAUSA_ENTRE_REINTENTOS_MS) || _cfg.pausaEntreReintentos || 100;
 const MAX_REINTENTOS_CFG = parseInt(process.env.MAX_REINTENTOS) || _cfg.maxReintentos || 10;
 
