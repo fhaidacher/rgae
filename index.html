@@ -529,7 +529,7 @@
           <div class="timeout-group">
             <span class="timeout-label">Cloudflare</span>
             <div class="timeout-spinner-wrap">
-              <input type="number" id="inputTimeoutCloudflare" value="1" min="1" max="300" onchange="guardarConfig()">
+              <input type="number" id="inputTimeoutCloudflare" value="30" min="1" max="300" onchange="guardarConfig()">
               <div class="spin-btn" onclick="spinChange('inputTimeoutCloudflare', 1)" title="Subir"><span>▲</span></div>
               <div class="spin-btn" onclick="spinChange('inputTimeoutCloudflare', -1)" title="Bajar"><span>▼</span>
               </div>
@@ -540,7 +540,7 @@
           <div class="timeout-group" style="display: none;">
             <span class="timeout-label">Fast Fail</span>
             <div class="timeout-spinner-wrap">
-              <input type="number" id="inputTimeoutFastFail" value="500" min="100" max="10000" step="100"
+              <input type="number" id="inputTimeoutFastFail" value="15000" min="1000" max="60000" step="1000"
                 onchange="guardarConfig()">
               <div class="spin-btn" onclick="spinChange('inputTimeoutFastFail', 100)" title="Subir"><span>▲</span></div>
               <div class="spin-btn" onclick="spinChange('inputTimeoutFastFail', -100)" title="Bajar"><span>▼</span>
@@ -552,7 +552,7 @@
           <div class="timeout-group" style="display: none;">
             <span class="timeout-label">Pausa Reintentos</span>
             <div class="timeout-spinner-wrap">
-              <input type="number" id="inputPausaReintentos" value="100" min="0" max="5000" step="50"
+              <input type="number" id="inputPausaReintentos" value="1000" min="500" max="30000" step="500"
                 onchange="guardarConfig()">
               <div class="spin-btn" onclick="spinChange('inputPausaReintentos', 50)" title="Subir"><span>▲</span></div>
               <div class="spin-btn" onclick="spinChange('inputPausaReintentos', -50)" title="Bajar"><span>▼</span></div>
@@ -997,9 +997,9 @@
       configSaveTimer = setTimeout(async () => {
         const cfg = {
           timeoutGeneral: parseFloat(document.getElementById('inputTimeoutGeneral').value) || 30,
-          timeoutCloudflare: parseFloat(document.getElementById('inputTimeoutCloudflare').value) || 1,
-          timeoutFastFailMs: parseInt(document.getElementById('inputTimeoutFastFail').value) || 500,
-          pausaEntreReintentos: parseInt(document.getElementById('inputPausaReintentos').value) || 100,
+          timeoutCloudflare: parseFloat(document.getElementById('inputTimeoutCloudflare').value) || 30,
+          timeoutFastFailMs: parseInt(document.getElementById('inputTimeoutFastFail').value) || 15000,
+          pausaEntreReintentos: parseInt(document.getElementById('inputPausaReintentos').value) || 1000,
           maxReintentos: parseInt(document.getElementById('inputMaxReintentos').value) || 10,
         };
         try {
@@ -1025,9 +1025,9 @@
 
       // Leer valores de los spinners
       const timeoutGeneral = parseInt(document.getElementById('inputTimeoutGeneral').value, 10) || 30;
-      const timeoutCloudflare = parseFloat(document.getElementById('inputTimeoutCloudflare').value) || 1;
-      const timeoutFastFailMs = parseInt(document.getElementById('inputTimeoutFastFail').value, 10) || 500;
-      const pausaEntreReintentos = parseInt(document.getElementById('inputPausaReintentos').value, 10) || 100;
+      const timeoutCloudflare = parseFloat(document.getElementById('inputTimeoutCloudflare').value) || 30;
+      const timeoutFastFailMs = parseInt(document.getElementById('inputTimeoutFastFail').value, 10) || 15000;
+      const pausaEntreReintentos = parseInt(document.getElementById('inputPausaReintentos').value, 10) || 1000;
       const maxReintentos = parseInt(document.getElementById('inputMaxReintentos').value, 10) || 10;
 
       // Limpiar el runId conocido para que el primer poll detecte el nuevo run

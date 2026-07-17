@@ -27,16 +27,16 @@ const server = http.createServer(async (req, res) => {
     req.on('data', chunk => { body += chunk.toString(); });
     req.on('end', async () => {
       let timeoutGeneral = 30;
-      let timeoutCloudflare = 1;
-      let timeoutFastFailMs = 500;
-      let pausaEntreReintentos = 100;
+      let timeoutCloudflare = 30;
+      let timeoutFastFailMs = 15000;
+      let pausaEntreReintentos = 1000;
       let maxReintentos = 10;
       try {
         const parsed = JSON.parse(body);
         if (parsed.timeoutGeneral)       timeoutGeneral       = parseFloat(parsed.timeoutGeneral)       || 30;
-        if (parsed.timeoutCloudflare)    timeoutCloudflare    = parseFloat(parsed.timeoutCloudflare)    || 1;
-        if (parsed.timeoutFastFailMs)    timeoutFastFailMs    = parseInt(parsed.timeoutFastFailMs)      || 500;
-        if (parsed.pausaEntreReintentos) pausaEntreReintentos = parseInt(parsed.pausaEntreReintentos)   || 100;
+        if (parsed.timeoutCloudflare)    timeoutCloudflare    = parseFloat(parsed.timeoutCloudflare)    || 30;
+        if (parsed.timeoutFastFailMs)    timeoutFastFailMs    = parseInt(parsed.timeoutFastFailMs)      || 15000;
+        if (parsed.pausaEntreReintentos) pausaEntreReintentos = parseInt(parsed.pausaEntreReintentos)   || 1000;
         if (parsed.maxReintentos)        maxReintentos        = parseInt(parsed.maxReintentos)           || 10;
 
         // Guardar en config.json para persistir entre ejecuciones
@@ -204,7 +204,7 @@ const server = http.createServer(async (req, res) => {
 
   if (req.url === '/api/get-config' && req.method === 'GET') {
     const cfgPath = path.join(__dirname, 'config.json');
-    let cfg = { timeoutGeneral: 30, timeoutCloudflare: 1, timeoutFastFailMs: 500, pausaEntreReintentos: 100, maxReintentos: 10 };
+    let cfg = { timeoutGeneral: 30, timeoutCloudflare: 30, timeoutFastFailMs: 15000, pausaEntreReintentos: 1000, maxReintentos: 10 };
     try {
       if (fs.existsSync(cfgPath)) cfg = JSON.parse(fs.readFileSync(cfgPath, 'utf8'));
     } catch (e) { }

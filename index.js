@@ -41,21 +41,21 @@ try {
 
 // Prioridad: variable de entorno > config.json > valor hardcoded
 const TIMEOUT_GENERAL = parseFloat(process.env.TIMEOUT_GENERAL) || _cfg.timeoutGeneral || 30;
-const TIMEOUT_WAIT_CLOUDFLARE = parseFloat(process.env.TIMEOUT_WAIT_CLOUDFLARE) || _cfg.timeoutCloudflare || 1;
-const TIMEOUT_FAST_FAIL_MS = parseInt(process.env.TIMEOUT_FAST_FAIL_MS) || _cfg.timeoutFastFailMs || 1000;
-const PAUSA_ENTRE_REINTENTOS_MS = parseInt(process.env.PAUSA_ENTRE_REINTENTOS_MS) || _cfg.pausaEntreReintentos || 100;
+const TIMEOUT_WAIT_CLOUDFLARE = parseFloat(process.env.TIMEOUT_WAIT_CLOUDFLARE) || _cfg.timeoutCloudflare || 30;
+const TIMEOUT_FAST_FAIL_MS = parseInt(process.env.TIMEOUT_FAST_FAIL_MS) || _cfg.timeoutFastFailMs || 15000;
+const PAUSA_ENTRE_REINTENTOS_MS = parseInt(process.env.PAUSA_ENTRE_REINTENTOS_MS) || _cfg.pausaEntreReintentos || 1000;
+const PAUSA_MAX_REINTENTOS_MS = 30000;
 const MAX_REINTENTOS_CFG = parseInt(process.env.MAX_REINTENTOS) || _cfg.maxReintentos || 10;
 
 console.log(`⚙️  Config → General:${TIMEOUT_GENERAL}s | Cloudflare:${TIMEOUT_WAIT_CLOUDFLARE}s | FastFail:${TIMEOUT_FAST_FAIL_MS}ms | Pausa:${PAUSA_ENTRE_REINTENTOS_MS}ms | MaxReintentos:${MAX_REINTENTOS_CFG}`);
 
 // Derivados (no tocar)
 const TIMEOUT_PAGINA_CARGA = TIMEOUT_GENERAL;
-const TIMEOUT_ESPERA_POST_CARGA = 0.7;
+const TIMEOUT_ESPERA_POST_CARGA = 2;
 const TIMEOUT_RESOLVER_CAPTCHA = TIMEOUT_GENERAL;
 
 // Limitar a ~10 registros por minuto (1 registro cada 6 segundos) para evitar bloqueos
-const TIMEOUT_ENTRE_NITS = parseFloat(process.env.TIMEOUT_GENERAL) || _cfg.timeoutGeneral || 5;
-const TIMEOUT_ENTRE_NITS_RAPIDO = parseFloat(process.env.TIMEOUT_ENTRE_NITS_RAPIDO) || _cfg.timeoutEntreNitsRapido || 5;
+const TIMEOUT_ENTRE_NITS = parseFloat(process.env.TIMEOUT_GENERAL) || _cfg.timeoutGeneral || 50;
 const TIMEOUT_NAVEGACION_INICIAL = TIMEOUT_GENERAL;
 
 
@@ -99,18 +99,12 @@ async function extraerDatos(page, nit, index, total, skipNavigation = false) {
       for (let p = 0; p < maxPolls; p++) {
         const estado = await page.evaluate(() => {
           const hayInput = !!document.querySelector('input[readonly]');
-          const texto = document.body ? document.body.innerText : '';
-          const verificando = texto.includes('Verificando acceso') || texto.includes('Verifying you are human');
-          return { hayInput, verificando };
+          return { hayInput };
         });
 
         if (estado.hayInput) {
           cfExito = true;
           break;
-        }
-
-        if (estado.verificando && p > maxPolls / 2) {
-          throw new Error('Cloudflare atascado en "Verificando acceso" (checkbox no marcado)');
         }
 
         await new Promise(r => setTimeout(r, POLL_INTERVAL_MS));
@@ -293,8 +287,13 @@ async function extraerDatos(page, nit, index, total, skipNavigation = false) {
         return { nit, url: urlPublica, status: 'ERROR', data: null, error: mensajeAmigable };
       }
 
-      // Pausa corta antes del siguiente intento
-      await new Promise(r => setTimeout(r, PAUSA_ENTRE_REINTENTOS_MS));
+      // Backoff lineal: 1s, 2s, 3s... hasta un máximo de 30s.
+      const pausaReintentoMs = Math.min(
+        PAUSA_ENTRE_REINTENTOS_MS * attempt,
+        PAUSA_MAX_REINTENTOS_MS
+      );
+      console.log(`${prefix} Esperando ${(pausaReintentoMs / 1000).toFixed(1)}s antes del siguiente intento...`);
+      await new Promise(r => setTimeout(r, pausaReintentoMs));
     }
   }
 }
@@ -555,13 +554,12 @@ async function main() {
       break;
     }
 
-    // Pausa corta si el NIT se extrajo sin reintentos (todo fluyó bien),
-    // pausa completa si hubo que reintentar (protege contra rate-limit de Cloudflare).
-    const pausaMs = resultado.status === 'ENCONTRADO'
-      ? TIMEOUT_ENTRE_NITS_RAPIDO * 1000
-      : TIMEOUT_ENTRE_NITS * 1000;
-
-    await new Promise(r => setTimeout(r, pausaMs));
+    // Los registros exitosos continúan de inmediato. Conserva la pausa configurada
+    // después de un error para evitar solicitudes fallidas demasiado frecuentes.
+    const quedanRegistros = i < NITS.length - 1;
+    if (quedanRegistros && resultado.status !== 'ENCONTRADO') {
+      await new Promise(r => setTimeout(r, TIMEOUT_ENTRE_NITS * 1000));
+    }
 
   }
 
