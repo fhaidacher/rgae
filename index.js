@@ -50,7 +50,7 @@ console.log(`⚙️  Config → General:${TIMEOUT_GENERAL}s | Cloudflare:${TIMEO
 
 // Derivados (no tocar)
 const TIMEOUT_PAGINA_CARGA = TIMEOUT_GENERAL;
-const TIMEOUT_ESPERA_POST_CARGA = 0.5;
+const TIMEOUT_ESPERA_POST_CARGA = 0.7;
 const TIMEOUT_RESOLVER_CAPTCHA = TIMEOUT_GENERAL;
 
 // Limitar a ~10 registros por minuto (1 registro cada 6 segundos) para evitar bloqueos
